@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Renalida - Atención Integral de la Salud Renal en Mar del Plata</title>
     <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="styleCarousel.css">
+    <script src="scriptCarousel.js"></script>
     
 </head>
 
@@ -116,11 +118,25 @@
     </section>
     <section class="caruseles">
         <div class="carusel-fotos">
-            <div class="carusel-fotos__container">
-                <img src="./assets/img/carusel/acceso_equitativo.png" alt="">
-                <button class="carusel-arrow left-arrow" onclick="moveCarousel('carusel-fotos', -1)">&#10094;</button>
-                <button class="carusel-arrow right-arrow" onclick="moveCarousel('carusel-fotos', 1)">&#10095;</button>
-            </div>
+            <main class="carousel-container">
+                <div class="carousel">
+                  <div class="item active">
+                    <img src="https://picsum.photos/id/237/500" alt="Image 1" />
+                    <p class="caption">texto imagen 1</p>
+                  </div>
+                  <div class="item">
+                    <img src="https://picsum.photos/id/247/400" alt="Image 2" />
+                    <p class="caption">texto imagen 2</p>
+                  </div>
+                  <div class="item">
+                    <img src="https://picsum.photos/id/257/700" alt="Image 3" />
+                    <p class="caption">texto imagen 3</p>
+                  </div>
+                </div>
+                <button class="btn prev">Prev</button>
+                <button class="btn next">Next</button>
+                <div class="dots"></div>
+              </main>
         </div>
 
         <div class="carusel-noticias">
