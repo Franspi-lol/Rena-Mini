@@ -142,3 +142,229 @@ body {
     font-size: 0.8rem;
 }
 
+
+.caruseles {
+    display: flex;
+    justify-content: center; /* Center the carousels horizontally */
+    align-items: center; /* Center the carousels vertically */
+    gap: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    height: 600px; /* Set the height of the container */
+}
+
+.carusel-fotos, .carusel-noticias {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+    height: 100%; /* Make the carousels take the full height of the container */
+    max-width: 1200px; /* Set the maximum width to match .contenedor_renalida */
+}
+
+.carusel-fotos__container, .carusel-noticias__container {
+    display: flex;
+    transition: transform 0.5s ease;
+    height: 100%; /* Ensure the containers take the full height */
+}
+
+.carusel-fotos__item, .carusel-noticias__item {
+    min-width: 100%;
+    box-sizing: border-box;
+    height: 100%; /* Ensure the items take the full height */
+}
+
+.carusel-fotos__item img {
+    width: 100%;
+    height: 100%; /* Make the images take the full height */
+    object-fit: cover; /* Ensure the images cover the container without distortion */
+    display: block;
+}
+
+.carusel-noticias__item {
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    height: 100%; /* Ensure the news items take the full height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center the content vertically */
+}
+
+.carusel-noticias__item h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.carusel-noticias__item p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+}
+
+.caruseles {
+    display: flex;
+    justify-content: center; /* Center the carousels horizontally */
+    align-items: center; /* Center the carousels vertically */
+    gap: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    height: 600px; /* Set the height of the container */
+}
+
+.carusel-fotos, .carusel-noticias {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+    height: 100%; /* Make the carousels take the full height of the container */
+    max-width: 1200px; /* Set the maximum width to match .contenedor_renalida */
+}
+
+.carusel-fotos__container, .carusel-noticias__container {
+    display: flex;
+    transition: transform 0.5s ease;
+    height: 100%; /* Ensure the containers take the full height */
+}
+
+.carusel-fotos__item, .carusel-noticias__item {
+    min-width: 100%;
+    box-sizing: border-box;
+    height: 100%; /* Ensure the items take the full height */
+}
+
+.carusel-fotos__item img {
+    width: 100%;
+    height: 100%; /* Make the images take the full height */
+    object-fit: cover; /* Ensure the images cover the container without distortion */
+    display: block;
+}
+
+.carusel-noticias__item {
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    height: 100%; /* Ensure the news items take the full height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center the content vertically */
+}
+
+.carusel-noticias__item h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.carusel-noticias__item p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+}
+
+.carusel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.left-arrow {
+    left: 10px;
+}
+
+.right-arrow {
+    right: 10px;
+}
+
+.contenedor_testimonios {
+    width: 100%;
+    padding: 50px 0;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.titulo_testimonios h1 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.testimonios {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.testimonio {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 300px;
+    text-align: center;
+}
+
+.testimonio img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-bottom: 20px;
+}
+
+.testimonio p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.testimonio h3 {
+    font-size: 1.2rem;
+    color: #333;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer-content p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.footer-content .socials {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.footer-content .socials li {
+    display: inline;
+}
+
+.footer-content .socials li a img {
+    width: 24px;
+    height: 24px;
+    filter: invert(100%); 
+}

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Renalida - Atención Integral de la Salud Renal en Mar del Plata</title>
     <link rel="stylesheet" href="home.css">
+    
 </head>
 
 <body>
@@ -116,28 +117,18 @@
     <section class="caruseles">
         <div class="carusel-fotos">
             <div class="carusel-fotos__container">
-                <div class="carusel-fotos__item">
-                    <img src="./assets/img/carusel/acceso_equitativo.png" alt="">
-                </div>
-                <div class="carusel-fotos__item">
-                    <img src="./assets/img/carusel/pareja.png" alt="">
-                </div>
-                <div class="carusel-fotos__item">
-                    <img src="./assets/img/foto3.jpg" alt="">
-                </div>
-                <div class="carusel-fotos__item">
-                    <img src="./assets/img/foto4.jpg" alt="">
-                </div>
-                <div class="carusel-fotos__item">
-                    <img src="./assets/img/foto5.jpg" alt="">
-                </div>
+                <img src="./assets/img/carusel/acceso_equitativo.png" alt="">
+                <button class="carusel-arrow left-arrow" onclick="moveCarousel('carusel-fotos', -1)">&#10094;</button>
+                <button class="carusel-arrow right-arrow" onclick="moveCarousel('carusel-fotos', 1)">&#10095;</button>
             </div>
         </div>
+
         <div class="carusel-noticias">
             <div class="carusel-noticias__container">
                 <div class="carusel-noticias__item">
                     <h3>Noticia 1</h3>
                     <p>Renálida recibe premio a la innovación en salud renal</p>
+                    <img src="./assets/img/fondo.png" alt="">
                 </div>
                 <div class="carusel-noticias__item">
                     <h3>Noticia 2</h3>
@@ -156,8 +147,53 @@
                     <p>Renálida lanza campaña de concientización sobre enfermedad renal</p>
                 </div>
             </div>
+            <button class="carusel-arrow left-arrow" onclick="moveCarousel('carusel-noticias', -1)">&#10094;</button>
+            <button class="carusel-arrow right-arrow" onclick="moveCarousel('carusel-noticias', 1)">&#10095;</button>
         </div>
     </section>
+    <section>
+        <div class="contenedor_testimonios">
+            <div class="titulo_testimonios">
+                <h1>Testimonios</h1>
+            </div>
+            <div class="testimonios">
+                <div class="testimonio">
+                    <img src="./assets/img/testimonios/persona1.png" alt="">
+                    <p>“Estoy muy agradecido con Renálida por la atención que recibí. Gracias a su equipo de
+                        profesionales, pude mejorar mi calidad de vida y controlar mi enfermedad renal de manera
+                        efectiva.”</p>
+                    <h3>Juan Pérez</h3>
+                </div>
+                <div class="testimonio">
+                    <img src="./assets/img/testimonios/persona2.png" alt="">
+                    <p>“Renálida me brindó una atención integral y personalizada que me permitió entender mejor mi
+                        enfermedad renal y aprender a manejarla de manera efectiva. Estoy muy agradecida por su
+                        dedicación y compromiso.”</p>
+                    <h3>María González</h3>
+                </div>
+                <div class="testimonio">
+                    <img src="./assets/img/testimonios/persona3.png" alt="">
+                    <p>“Gracias a Renálida, pude acceder a un tratamiento de calidad y mejorar mi calidad de vida. Su
+                        enfoque integral y su equipo de profesionales altamente capacitados hicieron la diferencia en mi
+                        recuperación.”</p>
+                    <h3>Carlos Rodríguez</h3>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2023 Renálida. Todos los derechos reservados.</p>
+            <ul class="socials">
+                <li><a href="#"><img src="./assets/img/facebook.png" alt="Facebook"></a></li>
+                <li><a href="#"><img src="./assets/img/gorjeo.png" alt="Twitter"></a></li>
+                <li><a href="#"><img src="./assets/img/instagram.png" alt="Instagram"></a></li>
+            </ul>
+        </div>
+    </footer>
+
 </body>
 
 </html>
