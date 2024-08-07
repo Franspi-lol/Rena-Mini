@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noticias Carusel</title>
+    <style>
+        .noticias_carusel {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            max-width: 60vw;
+            margin: 0 auto;
+            position: relative;
+            
+            
+            padding-left: 5rem;
+            padding-right: 5rem;
+        }
+        
+        .carusel_item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* Da el espacio */
+            min-width: 100%;
+            box-sizing: border-box;
+            display: none;
+            
+        }
+        
+        .carusel_imagen {
+            display: flex;
+            align-items: center; 
+            justify-content: center; 
+            width: 30%; 
+            overflow: hidden;
+            
+        }
+        
+        .carusel_imagen img {
+            max-width: 400px;
+            height: auto;
+            display: block;
+            max-height: 300px;
+        }
+        
+        .carusel-content {
+            display: flex;
+            flex-direction: column; /*Columna*/
+            align-items: center; 
+            justify-content: center; 
+            width: 70%; 
+            padding-left: 20px;
+            text-align: center;
+            
+        }
+        
+        .carusel_item h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        
+        .carusel_item p {
+            font-size: 1em;
+            margin-bottom: 15px;
+        }
+        
+        .prev,
+        .next {
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 10px;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10; 
+        }
+        
+        .prev {
+            left: -50px; 
+        }
+        
+        .next {
+            right: -50px; 
+        }
+    </style>
+</head>
+<body>
+    <div class="noticias_carusel">
+        <div class="prev">Prev</div>
+        <div class="carusel_item">
+            <div class="carusel_imagen">
+                <img src="https://picsum.photos/id/287/400/300" alt="Imagen 1">
+            </div>
+            <div class="carusel-content">
+                <h3>Titulo 1</h3>
+                <p>Esta es una noticia</p>
+                <a href="">Leer Mas</a>
+            </div>
+        </div>
+        <div class="carusel_item">
+            <div class="carusel_imagen">
+                <img src="https://picsum.photos/id/237/400/300" alt="Imagen 2">
+            </div>
+            <div class="carusel-content">
+                <h3>Titulo 2</h3>
+                <p>Esta es otra noticia</p>
+                <a href="">Leer Mas</a>
+            </div>
+        </div>
+        <div class="carusel_item">
+            <div class="carusel_imagen">
+                <img src="https://picsum.photos/id/239/500/900" alt="Imagen 3">
+            </div>
+            <div class="carusel-content">
+                <h3>Titulo 2</h3>
+                <p>Esta es otra noticia</p>
+                <a href="">Leer Mas</a>
+            </div>
+        </div>
+        <!-- Agregar mas -->
+        <div class="next">Next</div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        jQuery(document).ready(function ($) {
+            var currentIndex = 0;
+            var items = $('.noticias_carusel .carusel_item');
+            var itemAmt = items.length;
+
+            function mover_items() {
+                var item = $('.noticias_carusel .carusel_item').eq(currentIndex);
+                items.hide();
+                item.css('display', 'flex');
+            }
+
+            $('.next').click(function () {
+                currentIndex += 1;
+                if (currentIndex > itemAmt - 1) {
+                    currentIndex = 0;
+                }
+                mover_items();
+            });
+
+            $('.prev').click(function () {
+                currentIndex -= 1;
+                if (currentIndex < 0) {
+                    currentIndex = itemAmt - 1;
+                }
+                mover_items();
+            });
+
+            mover_items(); // Initialize the carousel
+        });
+    </script>
+</body>
+</html>
