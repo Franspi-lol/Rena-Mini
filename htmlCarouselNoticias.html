@@ -1,190 +1,234 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Carousel Noticias</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0;
-        }
-        .noticias_carusel {
-            position: relative;
-            width: 75vw;
-            overflow: hidden;
-            border: solid 1px #ccc;
-            
-        }
-        .carusel_container {
-            display: flex;
-            transition: transform 0.5s ease;
-            
-        }
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+      }
+      .noticias_carusel {
+        position: relative;
+        width: 75vw;
+        overflow: hidden;
+        border: solid 1px #ccc;
+      }
+      .carusel_container {
+        display: flex;
+        transition: transform 0.5s ease;
+      }
+      .carusel_item {
+        min-width: 100%;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+      }
+      .carusel_imagen {
+        min-width: 400px;
+        max-width: 400px;
+        max-height: 300px;
+        overflow: hidden;
+      }
+      .carusel_imagen img {
+        max-width: 400px;
+        max-height: 300px;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+      .carusel_contenido {
+        padding: 10px;
+        text-align: left;
+        border: solid 1px #ccc;
+        flex: 1;
+      }
+      .carusel_contenido h3 {
+        font-size: 1.5em;
+        margin: 0;
+      }
+      .carusel_contenido p {
+        margin: 0;
+      }
+      .carusel_contenido .date-views {
+        font-size: 0.8em;
+        color: gray;
+        display: flex;
+        justify-content: space-between;
+        margin: 5px 0;
+      }
+      .prev,
+      .next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 2rem;
+        cursor: pointer;
+        z-index: 10;
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+      .prev {
+        left: 10px;
+      }
+      .next {
+        right: 10px;
+      }
+      @media (min-width: 601px) and (max-width: 1024px) {
         .carusel_item {
-            min-width: 100%;
-            box-sizing: border-box;
-            display: flex;
-            align-items: center;
-        }
-        .carusel_imagen {
-            min-width: 400px;
-            max-width: 400px;
-            max-height: 300px;
-            overflow: hidden;
-        }
-        .carusel_imagen img {
-            max-width: 400px;
-            max-height: 300px;
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-        .carusel_contenido {
-            padding: 10px;
-            text-align: left;
-            border: solid 1px #ccc;
-            flex: 1;
+          flex-direction: column;
+          align-items: center;
         }
         .carusel_contenido h3 {
-            font-size: 1.5em;
-            margin: 0;
+          font-size: 1.3em;
         }
         .carusel_contenido p {
-            margin: 0;
+          font-size: 1.1em;
         }
-        .carusel_contenido .date-views {
-            font-size: 0.8em;
-            color: gray;
-            display: flex;
-            justify-content: space-between;
-            margin: 5px 0;
+        .carusel_imagen img {
+          max-width: 350px;
+          max-height: 250px;
         }
-        .prev, .next {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 2rem;
-            cursor: pointer;
-            z-index: 10;
-            background-color: rgba(0, 0, 0, 0.1);
+        .carusel_imagen {
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
-        .prev {
-            left: 10px;
-        }
+        .prev,
         .next {
-            right: 10px;
+          padding: 5px;
+          top: 20%;
         }
-        @media (max-width: 600px) {
-            .carusel_item {
-                flex-direction: column;
-                align-items: center;
-            }
-            .carusel_contenido h3 {
-                font-size: 1.2em;
-            }
-            .carusel_contenido p {
-                font-size: 1em;
-            }
-            .prev, .next {
-                padding: 5px;
-                top: 20%;
-            }
-            .carusel_imagen img {
-                max-width: 300px;
-                max-height: 200px;
-            }
-            .carusel_imagen {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-
+      }
+      @media (max-width: 600px) {
+        .carusel_item {
+          flex-direction: column;
+          align-items: center;
         }
+        .carusel_contenido h3 {
+          font-size: 1.2em;
+        }
+        .carusel_contenido p {
+          font-size: 1em;
+        }
+        .prev,
+        .next {
+          padding: 5px;
+          top: 20%;
+        }
+        .carusel_imagen img {
+          max-width: 300px;
+          max-height: 200px;
+        }
+        .carusel_imagen {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="noticias_carusel">
-        <div class="prev">&lArr;</div>
-        <div class="carusel_container">
-            <div class="carusel_item">
-                <div class="carusel_imagen">
-                    <img src="https://picsum.photos/id/287/400/300" alt="Imagen 1">
-                </div>
-                <div class="carusel_contenido">
-                    <h3>Titulo 1</h3>
-                    <div class="date-views">
-                        <span>AGOSTO 7, 2024</span>
-                    </div>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos rerum nesciunt quos debitis iure possimus at, officia, illum voluptates harum explicabo quia in? Molestias possimus rerum ea laudantium, in nostrum.. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nostrum provident minima modi ratione culpa dolorum nam? Quibusdam hic cum, maiores dicta assumenda laborum totam fuga voluptates id? Temporibus, minus aperiam. lore</p>
-                    <a href="">Leer Más</a>
-                </div>
+      <div class="prev">&lArr;</div>
+      <div class="carusel_container">
+        <div class="carusel_item">
+          <div class="carusel_imagen">
+            <img src="https://picsum.photos/id/287/400/300" alt="Imagen 1" />
+          </div>
+          <div class="carusel_contenido">
+            <h3>Titulo 1</h3>
+            <div class="date-views">
+              <span>AGOSTO 7, 2024</span>
             </div>
-            <div class="carusel_item">
-                <div class="carusel_imagen">
-                    <img src="https://picsum.photos/id/237/400/300" alt="Imagen 2">
-                </div>
-                <div class="carusel_contenido">
-                    <h3>Otra Noticia</h3>
-                    <div class="date-views">
-                        <span class="fecha">AGOSTO 8, 2024</span>
-                    </div>
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nisi natus, quos vitae ut maxime odio laboriosam! Doloribus veniam sunt, odit saepe sed sequi ipsa esse, aperiam temporibus ut autem dolore?</p>
-                    <a href="">Leer Más</a>
-                </div>
-            </div>
-            <div class="carusel_item">
-                <div class="carusel_imagen">
-                    <img src="https://picsum.photos/id/239/500/900" alt="Imagen 3">
-                </div>
-                <div class="carusel_contenido">
-                    <h3>Noticia Adicional</h3>
-                    <div class="date-views">
-                        <span>AGOSTO 9, 2024</span>
-                    </div>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam cumque sequi blanditiis. Eveniet eligendi perferendis nulla, vero nobis assumenda facilis quos ipsam harum architecto porro mayores qui, laborum nihil tempore?</p>
-                    <a href="">Leer Más</a>
-                </div>
-            </div>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Dignissimos rerum nesciunt quos debitis iure possimus at, officia,
+              illum voluptates harum explicabo quia in? Molestias possimus rerum
+              ea laudantium, in nostrum.. Lorem ipsum dolor sit, amet
+              consectetur adipisicing elit. Nostrum provident minima modi
+              ratione culpa dolorum nam? Quibusdam hic cum, maiores dicta
+              assumenda laborum totam fuga voluptates id? Temporibus, minus
+              aperiam. lore
+            </p>
+            <a href="">Leer Más</a>
+          </div>
         </div>
-        <div class="next">&rArr;</div>
+        <div class="carusel_item">
+          <div class="carusel_imagen">
+            <img src="https://picsum.photos/id/237/400/300" alt="Imagen 2" />
+          </div>
+          <div class="carusel_contenido">
+            <h3>Otra Noticia</h3>
+            <div class="date-views">
+              <span class="fecha">AGOSTO 8, 2024</span>
+            </div>
+            <p>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nisi
+              natus, quos vitae ut maxime odio laboriosam! Doloribus veniam
+              sunt, odit saepe sed sequi ipsa esse, aperiam temporibus ut autem
+              dolore?
+            </p>
+            <a href="">Leer Más</a>
+          </div>
+        </div>
+        <div class="carusel_item">
+          <div class="carusel_imagen">
+            <img src="https://picsum.photos/id/239/500/900" alt="Imagen 3" />
+          </div>
+          <div class="carusel_contenido">
+            <h3>Noticia Adicional</h3>
+            <div class="date-views">
+              <span>AGOSTO 9, 2024</span>
+            </div>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam
+              cumque sequi blanditiis. Eveniet eligendi perferendis nulla, vero
+              nobis assumenda facilis quos ipsam harum architecto porro mayores
+              qui, laborum nihil tempore?
+            </p>
+            <a href="">Leer Más</a>
+          </div>
+        </div>
+      </div>
+      <div class="next">&rArr;</div>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-        jQuery(document).ready(function ($) {
-            var currentIndex = 0;
-            var items = $('.carusel_item');
-            var itemAmt = items.length;
-            var container = $('.carusel_container');
+      jQuery(document).ready(function ($) {
+        var currentIndex = 0;
+        var items = $(".carusel_item");
+        var itemAmt = items.length;
+        var container = $(".carusel_container");
 
-            function rotar_items() {
-                var item = $('.carusel_item').eq(currentIndex);
-                var position = -currentIndex * 100 + '%';
-                container.css('transform', 'translateX(' + position + ')');
-            }
+        function rotar_items() {
+          var item = $(".carusel_item").eq(currentIndex);
+          var position = -currentIndex * 100 + "%";
+          container.css("transform", "translateX(" + position + ")");
+        }
 
-            $('.next').click(function() {
-                currentIndex += 1;
-                if (currentIndex > itemAmt - 1) {
-                    currentIndex = 0;
-                }
-                rotar_items();
-            });
-
-            $('.prev').click(function() {
-                currentIndex -= 1;
-                if (currentIndex < 0) {
-                    currentIndex = itemAmt - 1;
-                }
-                rotar_items();
-            });
-
-            rotar_items();
+        $(".next").click(function () {
+          currentIndex += 1;
+          if (currentIndex > itemAmt - 1) {
+            currentIndex = 0;
+          }
+          rotar_items();
         });
+
+        $(".prev").click(function () {
+          currentIndex -= 1;
+          if (currentIndex < 0) {
+            currentIndex = itemAmt - 1;
+          }
+          rotar_items();
+        });
+
+        rotar_items();
+      });
     </script>
-</body>
+  </body>
 </html>
