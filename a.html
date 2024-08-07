@@ -13,20 +13,21 @@
             margin: 0;
         }
         .noticias_carusel {
-            position: relative;
-            width: 75vw;
-            overflow: hidden;
-            border: solid 1px #ccc;
-            
-        }
-        .carusel_container {
             display: flex;
-            transition: transform 0.5s ease;
-            
+            justify-content: space-around;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            min-height: 25vh;
+            min-width: 75vw;
+            max-height: 25vh;
+            max-width: 75vw; 
+            border: solid 1px #ccc;
         }
         .carusel_item {
-            min-width: 100%;
+            max-width: 90%;
             box-sizing: border-box;
+            transition: transform 0.5s ease;
             display: flex;
             align-items: center;
         }
@@ -34,15 +35,17 @@
             min-width: 400px;
             max-width: 400px;
             max-height: 300px;
-            overflow: hidden;
+            overflow: hidden; 
         }
+        
         .carusel_imagen img {
             max-width: 400px;
             max-height: 300px;
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            object-fit: contain; 
         }
+        
         .carusel_contenido {
             padding: 10px;
             text-align: left;
@@ -92,60 +95,65 @@
             .prev, .next {
                 padding: 5px;
             }
+            .noticias_carusel{
+                max-height: 80vh;
+            }
             .carusel_imagen img {
                 max-width: 300px;
                 max-height: 200px;
             }
-            .carusel_imagen {
+            .carusel_imagen{
                 display: flex;
                 align-items: center;
                 justify-content: center;
             }
+            
         }
     </style>
 </head>
 <body>
     <div class="noticias_carusel">
-        <div class="prev">&lArr;</div>
-        <div class="carusel_container">
-            <div class="carusel_item">
-                <div class="carusel_imagen">
-                    <img src="https://picsum.photos/id/287/400/300" alt="Imagen 1">
-                </div>
-                <div class="carusel_contenido">
-                    <h3>Titulo 1</h3>
-                    <div class="date-views">
-                        <span>AGOSTO 7, 2024</span>
-                    </div>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos rerum nesciunt quos debitis iure possimus at, officia, illum voluptates harum explicabo quia in? Molestias possimus rerum ea laudantium, in nostrum.. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nostrum provident minima modi ratione culpa dolorum nam? Quibusdam hic cum, maiores dicta assumenda laborum totam fuga voluptates id? Temporibus, minus aperiam. lore</p>
-                    <a href="">Leer Más</a>
-                </div>
+        <div class="prev">	&lArr;</div>
+        <div class="carusel_item">
+            <div class="carusel_imagen">
+                <img src="https://picsum.photos/id/287/400/300" alt="Imagen 1">
             </div>
-            <div class="carusel_item">
-                <div class="carusel_imagen">
-                    <img src="https://picsum.photos/id/237/400/300" alt="Imagen 2">
+            <div class="carusel_contenido">
+                <h3>Titulo 1</h3>
+                <div class="date-views">
+                    <span>AGOSTO 7, 2024</span>
+                    
                 </div>
-                <div class="carusel_contenido">
-                    <h3>Otra Noticia</h3>
-                    <div class="date-views">
-                        <span class="fecha">AGOSTO 8, 2024</span>
-                    </div>
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nisi natus, quos vitae ut maxime odio laboriosam! Doloribus veniam sunt, odit saepe sed sequi ipsa esse, aperiam temporibus ut autem dolore?</p>
-                    <a href="">Leer Más</a>
-                </div>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos rerum nesciunt quos debitis iure possimus at, officia, illum voluptates harum explicabo quia in? Molestias possimus rerum ea laudantium, in nostrum.. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nostrum provident minima modi ratione culpa dolorum nam? Quibusdam hic cum, maiores dicta assumenda laborum totam fuga voluptates id? Temporibus, minus aperiam. lore</p>
+                <a href="">Leer Más</a>
             </div>
-            <div class="carusel_item">
-                <div class="carusel_imagen">
-                    <img src="https://picsum.photos/id/239/500/900" alt="Imagen 3">
+        </div>
+        <div class="carusel_item">
+            <div class="carusel_imagen">
+                <img src="https://picsum.photos/id/237/400/300" alt="Imagen 2">
+            </div>
+            <div class="carusel_contenido">
+                <h3>Otra Noticia</h3>
+                <div class="date-views">
+                    <span class="fecha">AGOSTO 8, 2024</span>
+                    
                 </div>
-                <div class="carusel_contenido">
-                    <h3>Noticia Adicional</h3>
-                    <div class="date-views">
-                        <span>AGOSTO 9, 2024</span>
-                    </div>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam cumque sequi blanditiis. Eveniet eligendi perferendis nulla, vero nobis assumenda facilis quos ipsam harum architecto porro mayores qui, laborum nihil tempore?</p>
-                    <a href="">Leer Más</a>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nisi natus, quos vitae ut maxime odio laboriosam! Doloribus veniam sunt, odit saepe sed sequi ipsa esse, aperiam temporibus ut autem dolore?</p>
+                <a href="">Leer Más</a>
+            </div>
+        </div>
+        <div class="carusel_item">
+            <div class="carusel_imagen">
+                <img src="https://picsum.photos/id/239/500/900" alt="Imagen 3">
+            </div>
+            <div class="carusel_contenido">
+                <h3>Noticia Adicional</h3>
+                <div class="date-views">
+                    <span>AGOSTO 9, 2024</span>
+                    
                 </div>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam cumque sequi blanditiis. Eveniet eligendi perferendis nulla, vero nobis assumenda facilis quos ipsam harum architecto porro maiores qui, laborum nihil tempore?</p>
+                <a href="">Leer Más</a>
             </div>
         </div>
         <div class="next">&rArr;</div>
@@ -155,14 +163,16 @@
     <script>
         jQuery(document).ready(function ($) {
             var currentIndex = 0;
-            var items = $('.carusel_item');
+            var items = $('.noticias_carusel .carusel_item');
             var itemAmt = items.length;
-            var container = $('.carusel_container');
 
-            function rotar_items() {
-                var item = $('.carusel_item').eq(currentIndex);
-                var position = -currentIndex * 100 + '%';
-                container.css('transform', 'translateX(' + position + ')');
+            /**
+            Toma el listado de noticias y el index actual y cambia noticias
+            **/
+            function cambiar_items() {
+                var item = $('.noticias_carusel .carusel_item').eq(currentIndex);
+                items.fadeOut(500); // Fade out de noticia actual
+                item.delay(500).fadeIn(500); // Fade in de noticia siguiente
             }
 
             $('.next').click(function() {
@@ -170,7 +180,7 @@
                 if (currentIndex > itemAmt - 1) {
                     currentIndex = 0;
                 }
-                rotar_items();
+                cambiar_items();
             });
 
             $('.prev').click(function() {
@@ -178,10 +188,10 @@
                 if (currentIndex < 0) {
                     currentIndex = itemAmt - 1;
                 }
-                rotar_items();
+                cambiar_items();
             });
 
-            rotar_items();
+            cambiar_items();
         });
     </script>
 </body>
