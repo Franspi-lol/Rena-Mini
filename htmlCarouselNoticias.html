@@ -21,7 +21,7 @@
             min-height: 25vh;
             min-width: 75vw;
             max-height: 25vh;
-            max-width: 75vw; /* Adjust the max-width as needed */
+            max-width: 75vw; 
             border: solid 1px #ccc;
         }
         .carusel_item {
@@ -35,7 +35,7 @@
             min-width: 400px;
             max-width: 400px;
             max-height: 300px;
-            overflow: hidden; /* Ensure the image does not overflow the container */
+            overflow: hidden; 
         }
         
         .carusel_imagen img {
@@ -43,23 +43,23 @@
             max-height: 300px;
             width: 100%;
             height: 100%;
-            object-fit: contain; /* Maintain aspect ratio and fit within the container */
+            object-fit: contain; 
         }
         
-        .carusel-content {
+        .carusel_contenido {
             padding: 10px;
             text-align: left;
             border: solid 1px #ccc;
             flex: 1;
         }
-        .carusel-content h3 {
+        .carusel_contenido h3 {
             font-size: 1.5em;
             margin: 0;
         }
-        .carusel-content p {
+        .carusel_contenido p {
             margin: 0;
         }
-        .carusel-content .date-views {
+        .carusel_contenido .date-views {
             font-size: 0.8em;
             color: gray;
             display: flex;
@@ -86,10 +86,10 @@
                 flex-direction: column;
                 align-items: center;
             }
-            .carusel-content h3 {
+            .carusel_contenido h3 {
                 font-size: 1.2em;
             }
-            .carusel-content p {
+            .carusel_contenido p {
                 font-size: 1em;
             }
             .prev, .next {
@@ -117,7 +117,7 @@
             <div class="carusel_imagen">
                 <img src="https://picsum.photos/id/287/400/300" alt="Imagen 1">
             </div>
-            <div class="carusel-content">
+            <div class="carusel_contenido">
                 <h3>Titulo 1</h3>
                 <div class="date-views">
                     <span>AGOSTO 7, 2024</span>
@@ -131,7 +131,7 @@
             <div class="carusel_imagen">
                 <img src="https://picsum.photos/id/237/400/300" alt="Imagen 2">
             </div>
-            <div class="carusel-content">
+            <div class="carusel_contenido">
                 <h3>Otra Noticia</h3>
                 <div class="date-views">
                     <span class="fecha">AGOSTO 8, 2024</span>
@@ -145,7 +145,7 @@
             <div class="carusel_imagen">
                 <img src="https://picsum.photos/id/239/500/900" alt="Imagen 3">
             </div>
-            <div class="carusel-content">
+            <div class="carusel_contenido">
                 <h3>Noticia Adicional</h3>
                 <div class="date-views">
                     <span>AGOSTO 9, 2024</span>
@@ -165,10 +165,13 @@
             var items = $('.noticias_carusel .carusel_item');
             var itemAmt = items.length;
 
-            function cycleItems() {
+            /**
+            Toma el listado de noticias y el index actual y cambia noticias
+            **/
+            function cambiar_items() {
                 var item = $('.noticias_carusel .carusel_item').eq(currentIndex);
-                items.hide();
-                item.css('display', 'flex');
+                items.fadeOut(500); // Fade out de noticia actual
+                item.delay(500).fadeIn(500); // Fade in de noticia siguiente
             }
 
             $('.next').click(function() {
@@ -176,7 +179,7 @@
                 if (currentIndex > itemAmt - 1) {
                     currentIndex = 0;
                 }
-                cycleItems();
+                cambiar_items();
             });
 
             $('.prev').click(function() {
@@ -184,10 +187,10 @@
                 if (currentIndex < 0) {
                     currentIndex = itemAmt - 1;
                 }
-                cycleItems();
+                cambiar_items();
             });
 
-            cycleItems();
+            cambiar_items();
         });
     </script>
 </body>
