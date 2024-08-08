@@ -199,6 +199,101 @@
         var itemAmt = items.length;
         var container = $(".carusel_container");
 
+        //funcion para obtener entradas de API REST de wordpress
+        function obtener_entradas(){
+          $.ajax({
+            url: "https://renalida.com/wp-json/wp/v2/posts",
+            type: "GET",
+            success: function (data) {
+              data.forEach((post) => {
+                console.log(post);
+                
+                var imagen = obtener_imagen(post);
+                var fecha = obtener_fecha(post);
+                var titulo = obtener_titulo(post);
+                var excerpt = obtener_excerpt(post);
+                var link = obtener_link(post);
+
+                console.log(titulo);
+                console.log(excerpt);
+                console.log(imagen);
+                console.log(fecha);
+                console.log(link);
+              });
+              
+            },
+            error: function (error) {
+              console.log(error);
+            },
+          });
+        }
+
+        /**
+         * Funcion para obtener el link de la entrada
+         * @param {object} post 
+         * @returns {string} link de la entrada
+         */
+        function obtener_link(post)
+        {
+          var link = post.link;
+          return link;
+        }
+
+        /**
+         * Funcion para obtener el excerpt de la entrada
+         * @param {object} post 
+         * @returns {string} excerpt de la entrada
+         */
+        function obtener_excerpt(post)
+        {
+          var excerpt = post.excerpt.rendered;
+          return excerpt;
+        }
+
+        /**
+         * Funcion para obtener el titulo de la entrada
+         * @param {object} post 
+         * @returns {string} titulo de la entrada
+         */
+        function obtener_titulo(post)
+        {
+          var titulo = post.title.rendered;
+          return titulo;
+        }
+
+        /**
+         * Funcion para obtener la imagen de la entrada
+         * @param {object} post 
+         * @returns {string} url de la imagen
+         */
+        function obtener_imagen(post)
+        {
+          if (post.yoast_head_json.og_image && post.yoast_head_json.og_image.length > 0) //si existe og_image y og_image tiene al menos un elemento
+                { 
+                  var imagen = post.yoast_head_json.og_image[0].url;//obtener la url de la imagen
+                }else
+                {
+                  var imagen = 'https://via.placeholder.com/400x300';//imagen por defecto
+                }
+          return imagen;
+        }
+
+        /**
+         * Funcion para obtener la fecha de la entrada
+         * @param {object} post 
+         * @returns {string} fecha de la entrada
+         */
+        function obtener_fecha(post)
+        {
+          var fecha = new Date(post.date).toLocaleDateString('es-ES', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          });
+          return fecha;
+        }
+
+
         function rotar_items() {
           var item = $(".carusel_item").eq(currentIndex);
           var position = -currentIndex * 100 + "%";
@@ -221,6 +316,7 @@
           rotar_items();
         });
 
+        obtener_entradas();
         rotar_items();
       });
     </script>
