@@ -331,13 +331,17 @@
         return fecha;
       }
 
-
+      /**
+       * Funcion para rotar los items del carusel
+       */
       function rotar_items() {
         var item = $(".carusel_item").eq(currentIndex);
         var position = -currentIndex * 100 + "%";
         container.css("transform", "translateX(" + position + ")");
       }
-
+      /**
+       * Evento para rotar los items hacia la derecha
+       */
       $(".next").click(function () {
         currentIndex += 1;
         if (currentIndex > itemAmt - 1) {
@@ -345,7 +349,9 @@
         }
         rotar_items();
       });
-
+      /**
+       * Evento para rotar los items hacia la izquierda
+       */
       $(".prev").click(function () {
         currentIndex -= 1;
         if (currentIndex < 0) {
