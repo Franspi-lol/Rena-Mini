@@ -5,56 +5,79 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Carousel Noticias</title>
     <style>
-      
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+      }
+
       .noticias_carusel {
         position: relative;
         width: 75vw;
+        max-width: 1000px;
         overflow: hidden;
-        border: solid 1px #ccc;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        background: linear-gradient(135deg, #fff, #f0f0f0);
+        margin: auto;
+        margin-top: 20px;
       }
+
       .carusel_container {
         display: flex;
         transition: transform 0.5s ease;
       }
+
       .carusel_item {
         min-width: 100%;
         box-sizing: border-box;
         display: flex;
         align-items: center;
+        border-bottom: solid 1px #e0e0e0;
+        padding: 10px;
       }
+
       .carusel_imagen {
-        min-width: 400px;
-        max-width: 400px;
-        max-height: 300px;
+        min-width: 300px;
+        max-width: 300px;
+        max-height: 200px;
         overflow: hidden;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       }
+
       .carusel_imagen img {
-        max-width: 400px;
-        max-height: 300px;
         width: 100%;
         height: 100%;
-        object-fit: contain;
+        object-fit: cover;
       }
+
       .carusel_contenido {
-        padding: 10px;
-        text-align: left;
-        border: solid 1px #ccc;
         flex: 1;
+        padding: 20px;
+        background: #fff;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       }
+
       .carusel_contenido h3 {
         font-size: 1.5em;
         margin: 0;
+        color: #333;
       }
+
       .carusel_contenido p {
-        margin: 0;
+        margin: 10px 0;
+        color: #666;
       }
+
       .carusel_contenido .date-views {
         font-size: 0.8em;
-        color: gray;
+        color: #999;
         display: flex;
         justify-content: space-between;
-        margin: 5px 0;
       }
+
       .prev,
       .next {
         position: absolute;
@@ -63,135 +86,78 @@
         font-size: 2rem;
         cursor: pointer;
         z-index: 10;
-        background-color: rgba(0, 0, 0, 0.1);
+        background-color: rgba(0, 0, 0, 0.2);
+        color: #fff;
+        border-radius: 50%;
+        padding: 10px;
+        transition: background-color 0.3s, transform 0.3s;
       }
+
+      .prev:hover,
+      .next:hover {
+        background-color: rgba(0, 0, 0, 0.4);
+        transform: translateY(-50%) scale(1.1);
+      }
+
       .prev {
-        left: 10px;
+        left: 15px;
       }
+
       .next {
-        right: 10px;
+        right: 15px;
       }
+
       @media (min-width: 601px) and (max-width: 1024px) {
         .carusel_item {
           flex-direction: column;
-          align-items: center;
         }
+
         .carusel_contenido h3 {
           font-size: 1.3em;
         }
+
         .carusel_contenido p {
           font-size: 1.1em;
         }
-        .carusel_imagen img {
-          max-width: 350px;
-          max-height: 250px;
-        }
+
         .carusel_imagen {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-        .prev,
-        .next {
-          padding: 5px;
-          top: 20%;
+          max-width: 250px;
+          max-height: 180px;
         }
       }
+
       @media (max-width: 600px) {
         .carusel_item {
           flex-direction: column;
-          align-items: center;
         }
+
         .carusel_contenido h3 {
           font-size: 1.2em;
         }
+
         .carusel_contenido p {
           font-size: 1em;
         }
-        .prev,
-        .next {
-          padding: 5px;
-          top: 20%;
-        }
-        .carusel_imagen img {
-          max-width: 300px;
-          max-height: 200px;
-        }
+
         .carusel_imagen {
-          display: flex;
-          align-items: center;
-          justify-content: center;
+          max-width: 220px;
+          max-height: 160px;
         }
       }
     </style>
   </head>
+
   <body>
     <div class="noticias_carusel">
       <div class="prev">&lArr;</div>
       <div class="carusel_container">
-        <div class="carusel_item">
-          <div class="carusel_imagen">
-            <img src="https://picsum.photos/id/287/400/300" alt="Imagen 1" />
-          </div>
-          <div class="carusel_contenido">
-            <h3>Titulo 1</h3>
-            <div class="date-views">
-              <span>AGOSTO 7, 2024</span>
-            </div>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Dignissimos rerum nesciunt quos debitis iure possimus at, officia,
-              illum voluptates harum explicabo quia in? Molestias possimus rerum
-              ea laudantium, in nostrum.. Lorem ipsum dolor sit, amet
-              consectetur adipisicing elit. Nostrum provident minima modi
-              ratione culpa dolorum nam? Quibusdam hic cum, maiores dicta
-              assumenda laborum totam fuga voluptates id? Temporibus, minus
-              aperiam. lore
-            </p>
-            <a href="">Leer Más</a>
-          </div>
-        </div>
-        <div class="carusel_item">
-          <div class="carusel_imagen">
-            <img src="https://picsum.photos/id/237/400/300" alt="Imagen 2" />
-          </div>
-          <div class="carusel_contenido">
-            <h3>Otra Noticia</h3>
-            <div class="date-views">
-              <span class="fecha">AGOSTO 8, 2024</span>
-            </div>
-            <p>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nisi
-              natus, quos vitae ut maxime odio laboriosam! Doloribus veniam
-              sunt, odit saepe sed sequi ipsa esse, aperiam temporibus ut autem
-              dolore?
-            </p>
-            <a href="">Leer Más</a>
-          </div>
-        </div>
-        <div class="carusel_item">
-          <div class="carusel_imagen">
-            <img src="https://picsum.photos/id/239/500/900" alt="Imagen 3" />
-          </div>
-          <div class="carusel_contenido">
-            <h3>Noticia Adicional</h3>
-            <div class="date-views">
-              <span>AGOSTO 9, 2024</span>
-            </div>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam
-              cumque sequi blanditiis. Eveniet eligendi perferendis nulla, vero
-              nobis assumenda facilis quos ipsam harum architecto porro mayores
-              qui, laborum nihil tempore?
-            </p>
-            <a href="">Leer Más</a>
-          </div>
-        </div>
+        <!-- Los elementos del carrusel se agregarán aquí dinámicamente -->
       </div>
       <div class="next">&rArr;</div>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
     <script>
       jQuery(document).ready(function ($) {
         var currentIndex = 0;
@@ -199,8 +165,105 @@
         var itemAmt = items.length;
         var container = $(".carusel_container");
 
+        function obtener_entradas() {
+          $.ajax({
+            url: "https://renalida.com/wp-json/wp/v2/posts",
+            type: "GET",
+            success: function (data) {
+              data.forEach((post) => {
+                if (chequear_categoria(post, "category-noticias")) {
+                  var imagen = obtener_imagen(post);
+                  var fecha = obtener_fecha(post);
+                  var titulo = obtener_titulo(post);
+                  var excerpt = obtener_excerpt(post);
+                  var link = obtener_link(post);
+
+                  var item = crear_elemnto_html(
+                    imagen,
+                    titulo,
+                    excerpt,
+                    fecha,
+                    link
+                  );
+                  container.append(item);
+                  itemAmt += 1;
+                }
+              });
+            },
+            error: function (error) {
+              console.log("Error con la obtención de las entradas", error);
+            },
+          });
+        }
+
+        function crear_elemnto_html(imagen, titulo, excerpt, fecha, link) {
+          var item = document.createElement("div");
+          item.classList.add("carusel_item");
+
+          var imagen_div = document.createElement("div");
+          imagen_div.classList.add("carusel_imagen");
+          var imagen_img = document.createElement("img");
+          imagen_img.src = imagen;
+          imagen_div.appendChild(imagen_img);
+
+          var contenido_div = document.createElement("div");
+          contenido_div.classList.add("carusel_contenido");
+          var titulo_h3 = document.createElement("h3");
+          titulo_h3.textContent = titulo;
+          var fecha_div = document.createElement("div");
+          fecha_div.classList.add("date-views");
+          var fecha_span = document.createElement("span");
+          fecha_span.textContent = fecha;
+          fecha_div.appendChild(fecha_span);
+          var excerpt_p = document.createElement("p");
+          excerpt_p.textContent = excerpt;
+          var link_a = document.createElement("a");
+          link_a.href = link;
+          link_a.textContent = "Leer Más";
+          contenido_div.appendChild(titulo_h3);
+          contenido_div.appendChild(fecha_div);
+          contenido_div.appendChild(excerpt_p);
+          contenido_div.appendChild(link_a);
+
+          item.appendChild(imagen_div);
+          item.appendChild(contenido_div);
+
+          return item;
+        }
+
+        function chequear_categoria(post, categoria_a_chequear) {
+          return post.class_list.includes(categoria_a_chequear);
+        }
+
+        function obtener_link(post) {
+          return post.link;
+        }
+
+        function obtener_excerpt(post) {
+          var excerpt = post.excerpt.rendered;
+          return excerpt.replace(/<\/?p>/g, "").replace("[&hellip;]", "...");
+        }
+
+        function obtener_titulo(post) {
+          return post.title.rendered;
+        }
+
+        function obtener_imagen(post) {
+          return (
+            post.yoast_head_json.og_image?.[0]?.url ||
+            "https://via.placeholder.com/400x300"
+          );
+        }
+
+        function obtener_fecha(post) {
+          return new Date(post.date).toLocaleDateString("es-ES", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          });
+        }
+
         function rotar_items() {
-          var item = $(".carusel_item").eq(currentIndex);
           var position = -currentIndex * 100 + "%";
           container.css("transform", "translateX(" + position + ")");
         }
@@ -221,6 +284,47 @@
           rotar_items();
         });
 
+        // Funcionalidad de deslizar con el dedo
+        var hammer;
+        function habilitar_deslizar() {
+          hammer = new Hammer(container[0]);
+          hammer.on("swipeleft", function () {
+            currentIndex += 1;
+            if (currentIndex > itemAmt - 1) {
+              currentIndex = 0;
+            }
+            rotar_items();
+          });
+
+          hammer.on("swiperight", function () {
+            currentIndex -= 1;
+            if (currentIndex < 0) {
+              currentIndex = itemAmt - 1;
+            }
+            rotar_items();
+          });
+        }
+
+        function deshabilitar_deslizar() {
+          if (hammer) {
+            hammer.off("swipeleft");
+            hammer.off("swiperight");
+          }
+        }
+
+        // Inicializar la funcionalidad de deslizar según el tamaño de la pantalla
+        function verificar_tamano_pantalla() {
+          if (window.innerWidth <= 1024) {
+            habilitar_deslizar();
+          } else {
+            deshabilitar_deslizar();
+          }
+        }
+
+        window.addEventListener("resize", verificar_tamano_pantalla);
+        verificar_tamano_pantalla(); // Verificar al cargar la página
+
+        obtener_entradas();
         rotar_items();
       });
     </script>
