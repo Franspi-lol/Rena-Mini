@@ -165,12 +165,13 @@
         justify-content: center;
         max-height: 160px;
       }
-      .carusel_imagen img{
+
+      .carusel_imagen img {
         max-width: 220px;
-        
+
         max-height: 160px;
       }
-      
+
     }
   </style>
 </head>
@@ -406,9 +407,10 @@
         }
       }
 
-      window.addEventListener("resize", verificar_tamano_pantalla);
-      verificar_tamano_pantalla(); // Verificar al cargar la página
-
+      /*window.addEventListener("resize", verificar_tamano_pantalla);
+      verificar_tamano_pantalla(); // Verificar al cargar la página*/
+      verificar_tamano_pantalla();
+      //habilitar_deslizar();
       obtener_entradas();
       rotar_items();
     });
