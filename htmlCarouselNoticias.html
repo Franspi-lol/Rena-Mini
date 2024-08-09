@@ -1,318 +1,352 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Carousel Noticias</title>
-    <style>
-      body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background-color: #f5f5f5;
-      }
 
-      .noticias_carusel {
-        position: relative;
-        width: 75vw;
-        max-width: 1000px;
-        overflow: hidden;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        background: linear-gradient(135deg, #fff, #f0f0f0);
-        margin: auto;
-        margin-top: 20px;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carousel Noticias</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+    }
 
-      .carusel_container {
-        display: flex;
-        transition: transform 0.5s ease;
-      }
+    .noticias_carusel {
+      position: relative;
+      width: 75vw;
+      max-width: 1000px;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      background: linear-gradient(135deg, #fff, #f0f0f0);
+      margin: auto;
+      margin-top: 20px;
+    }
 
+    .carusel_container {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+
+    .carusel_item {
+      min-width: 100%;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      border-bottom: solid 1px #e0e0e0;
+      padding: 10px;
+    }
+
+    .carusel_imagen {
+      min-width: 300px;
+      max-width: 300px;
+      max-height: 200px;
+      overflow: hidden;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .carusel_imagen img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .carusel_contenido {
+      flex: 1;
+      padding: 20px;
+      background: #fff;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .carusel_contenido h3 {
+      font-size: 1.5em;
+      margin: 0;
+      color: #333;
+    }
+
+    .carusel_contenido p {
+      margin: 10px 0;
+      color: #666;
+    }
+
+    .carusel_contenido .date-views {
+      font-size: 0.8em;
+      color: #999;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .prev,
+    .next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2rem;
+      cursor: pointer;
+      z-index: 10;
+      background-color: rgba(0, 0, 0, 0.2);
+      color: #fff;
+      border-radius: 50%;
+      padding: 10px;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .prev:hover,
+    .next:hover {
+      background-color: rgba(0, 0, 0, 0.4);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .prev {
+      left: 15px;
+    }
+
+    .next {
+      right: 15px;
+    }
+
+    @media (min-width: 601px) and (max-width: 1024px) {
       .carusel_item {
-        min-width: 100%;
-        box-sizing: border-box;
-        display: flex;
-        align-items: center;
-        border-bottom: solid 1px #e0e0e0;
-        padding: 10px;
-      }
-
-      .carusel_imagen {
-        min-width: 300px;
-        max-width: 300px;
-        max-height: 200px;
-        overflow: hidden;
-        border-radius: 5px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      }
-
-      .carusel_imagen img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-
-      .carusel_contenido {
-        flex: 1;
-        padding: 20px;
-        background: #fff;
-        border-radius: 5px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        flex-direction: column;
       }
 
       .carusel_contenido h3 {
-        font-size: 1.5em;
-        margin: 0;
-        color: #333;
+        font-size: 1.3em;
       }
 
       .carusel_contenido p {
-        margin: 10px 0;
-        color: #666;
+        font-size: 1.1em;
       }
 
-      .carusel_contenido .date-views {
-        font-size: 0.8em;
-        color: #999;
-        display: flex;
-        justify-content: space-between;
+      .carusel_imagen {
+        max-width: 250px;
+        max-height: 180px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .carusel_item {
+        flex-direction: column;
       }
 
-      .prev,
-      .next {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        font-size: 2rem;
-        cursor: pointer;
-        z-index: 10;
-        background-color: rgba(0, 0, 0, 0.2);
-        color: #fff;
-        border-radius: 50%;
-        padding: 10px;
-        transition: background-color 0.3s, transform 0.3s;
+      .carusel_contenido h3 {
+        font-size: 1.2em;
       }
 
-      .prev:hover,
-      .next:hover {
-        background-color: rgba(0, 0, 0, 0.4);
-        transform: translateY(-50%) scale(1.1);
+      .carusel_contenido p {
+        font-size: 1em;
       }
 
-      .prev {
-        left: 15px;
+      .carusel_imagen {
+        max-width: 220px;
+        max-height: 160px;
       }
+    }
+  </style>
+</head>
 
-      .next {
-        right: 15px;
-      }
-
-      @media (min-width: 601px) and (max-width: 1024px) {
-        .carusel_item {
-          flex-direction: column;
-        }
-
-        .carusel_contenido h3 {
-          font-size: 1.3em;
-        }
-
-        .carusel_contenido p {
-          font-size: 1.1em;
-        }
-
-        .carusel_imagen {
-          max-width: 250px;
-          max-height: 180px;
-        }
-      }
-
-      @media (max-width: 600px) {
-        .carusel_item {
-          flex-direction: column;
-        }
-
-        .carusel_contenido h3 {
-          font-size: 1.2em;
-        }
-
-        .carusel_contenido p {
-          font-size: 1em;
-        }
-
-        .carusel_imagen {
-          max-width: 220px;
-          max-height: 160px;
-        }
-      }
-    </style>
-  </head>
-
-  <body>
-    <div class="noticias_carusel">
-      <div class="prev">&lArr;</div>
-      <div class="carusel_container">
-        <!-- Los elementos del carrusel se agregarán aquí dinámicamente -->
-      </div>
-      <div class="next">&rArr;</div>
+<body>
+  <div class="noticias_carusel">
+    <div class="prev">&lArr;</div>
+    <div class="carusel_container">
+      <!-- Los elementos del carrusel se agregarán aca automaticamente -->
     </div>
+    <div class="next">&rArr;</div>
+  </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
-    <script>
-      jQuery(document).ready(function ($) {
-        var currentIndex = 0;
-        var items = $(".carusel_item");
-        var itemAmt = items.length;
-        var container = $(".carusel_container");
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+  <script>
+    jQuery(document).ready(function ($) {
+      var currentIndex = 0;
+      var items = $(".carusel_item");
+      var itemAmt = items.length;
+      var container = $(".carusel_container");
 
-        /**
+      /**
        * Funcion para obtener las entradas de la pagina y mostrarlas en el carusel
        */
-        function obtener_entradas() {
-          $.ajax({
-            url: "https://renalida.com/wp-json/wp/v2/posts",
-            type: "GET",
-            success: function (data) {
-              data.forEach((post) => {
-                if (chequear_categoria(post, "category-noticias")) { //si la entrada tiene la categoria 'category-noticias'
-                  var imagen = obtener_imagen(post);
-                  var fecha = obtener_fecha(post);
-                  var titulo = obtener_titulo(post);
-                  var excerpt = obtener_excerpt(post);
-                  var link = obtener_link(post);
+      function obtener_entradas() {
+        $.ajax({
+          url: "https://renalida.com/wp-json/wp/v2/posts",
+          type: "GET",
+          success: function (data) {
+            data.forEach((post) => {
+              if (chequear_categoria(post, "category-noticias")) { //si la entrada tiene la categoria 'category-noticias'
+                var imagen = obtener_imagen(post);
+                var fecha = obtener_fecha(post);
+                var titulo = obtener_titulo(post);
+                var excerpt = obtener_excerpt(post);
+                var link = obtener_link(post);
+                var autor = obtener_autor(post);
+                var item = crear_elemnto_html(
+                  imagen,
+                  titulo,
+                  excerpt,
+                  fecha,
+                  link,
+                  autor
+                );
+                container.append(item);
+                itemAmt += 1;
+              }
+            });
+          },
+          error: function (error) {
+            console.log("Error con la obtención de las entradas", error);
+          },
+        });
+      }
 
-                  var item = crear_elemnto_html(
-                    imagen,
-                    titulo,
-                    excerpt,
-                    fecha,
-                    link
-                  );
-                  container.append(item);
-                  itemAmt += 1;
-                }
-              });
-            },
-            error: function (error) {
-              console.log("Error con la obtención de las entradas", error);
-            },
-          });
+
+      /**
+ * Funcion para crear un elemento html con la informacion de la entrada
+ * @param {string} imagen 
+ * @param {string} titulo 
+ * @param {string} excerpt 
+ * @param {string} fecha 
+ * @param {string} link 
+ * @param {string} autor
+ * @returns {object} elemento html
+ */
+      function crear_elemnto_html(imagen, titulo, excerpt, fecha, link, autor) {
+        var item = document.createElement("div");
+        item.classList.add("carusel_item");
+
+        var imagen_div = document.createElement("div");
+        imagen_div.classList.add("carusel_imagen");
+        var imagen_img = document.createElement("img");
+        imagen_img.src = imagen;
+        imagen_div.appendChild(imagen_img);
+
+        var contenido_div = document.createElement("div");
+        contenido_div.classList.add("carusel_contenido");
+        var titulo_h3 = document.createElement("h3");
+        titulo_h3.textContent = titulo;
+        var fecha_div = document.createElement("div");
+        fecha_div.classList.add("date-views");
+        var fecha_span = document.createElement("span");
+        fecha_span.textContent = fecha;
+        var autor_span = document.createElement("span");
+        autor_span.textContent = autor;
+        fecha_div.appendChild(fecha_span);
+        fecha_div.appendChild(autor_span);
+        var excerpt_p = document.createElement("p");
+        excerpt_p.textContent = excerpt;
+        var link_a = document.createElement("a");
+        link_a.href = link;
+        link_a.textContent = "Leer Más";
+        contenido_div.appendChild(titulo_h3);
+        contenido_div.appendChild(fecha_div);
+        contenido_div.appendChild(excerpt_p);
+        contenido_div.appendChild(link_a);
+
+        item.appendChild(imagen_div);
+        item.appendChild(contenido_div);
+
+        return item;
+      }
+      /**
+      * Funcion para chequear si la entrada tiene una categoria especifica
+      * @param {object} post
+      * @param {string} categoria_a_chequear
+      * @returns {boolean} true si la entrada tiene la categoria, false si no
+      */
+      function chequear_categoria(post, categoria_a_chequear) {
+        return post.class_list.includes(categoria_a_chequear);
+      }
+
+      /**
+      * Funcion para obtener el link de la entrada
+      * @param {object} post
+      * @returns {string} link de la entrada
+      */
+      function obtener_link(post) {
+        return post.link;
+      }
+
+      /**
+      * Funcion para obtener el autor de la entrada
+      * @param {object} post
+      * @returns {string} autor de la entrada
+      */
+      function obtener_autor(post) {
+        return post.yoast_head_json.author;
+      }
+
+      /**
+      * Funcion para obtener el excerpt de la entrada
+      * @param {object} post
+      * @returns {string} excerpt de la entrada
+      */
+      function obtener_excerpt(post) {
+        var excerpt = post.excerpt.rendered;
+        return excerpt.replace(/<\/?p>/g, "").replace("[&hellip;]", "...").replace(/&#8220;/g, '"').replace(/&#8221;/g, '"');
+      }
+
+      /**
+      * Funcion para obtener el titulo de la entrada
+      * @param {object} post
+      * @returns {string} titulo de la entrada
+      */
+      function obtener_titulo(post) {
+        return post.title.rendered;
+      }
+
+      /**
+      * Funcion para obtener la imagen de la entrada
+      * @param {object} post
+      * @returns {string} url de la imagen de la entrada
+      */
+      function obtener_imagen(post) {
+        return (
+          post.yoast_head_json.og_image?.[0]?.url ||
+          "https://via.placeholder.com/400x300"
+        );
+      }
+
+      /**
+      * Funcion para obtener la fecha de la entrada
+      * @param {object} post
+      * @returns {string} fecha de la entrada
+      */
+      function obtener_fecha(post) {
+        return new Date(post.date).toLocaleDateString("es-ES", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        });
+      }
+
+      function rotar_items() {
+        var position = -currentIndex * 100 + "%";
+        container.css("transform", "translateX(" + position + ")");
+      }
+
+      $(".next").click(function () {
+        currentIndex += 1;
+        if (currentIndex > itemAmt - 1) {
+          currentIndex = 0;
         }
+        rotar_items();
+      });
 
-
-        /**
-       * Funcion para crear un elemento html con la informacion de la entrada
-       * @param {string} imagen 
-       * @param {string} titulo 
-       * @param {string} excerpt 
-       * @param {string} fecha 
-       * @param {string} link 
-       * @returns {object} elemento html
-       */
-        function crear_elemnto_html(imagen, titulo, excerpt, fecha, link) {
-          var item = document.createElement("div");
-          item.classList.add("carusel_item");
-
-          var imagen_div = document.createElement("div");
-          imagen_div.classList.add("carusel_imagen");
-          var imagen_img = document.createElement("img");
-          imagen_img.src = imagen;
-          imagen_div.appendChild(imagen_img);
-
-          var contenido_div = document.createElement("div");
-          contenido_div.classList.add("carusel_contenido");
-          var titulo_h3 = document.createElement("h3");
-          titulo_h3.textContent = titulo;
-          var fecha_div = document.createElement("div");
-          fecha_div.classList.add("date-views");
-          var fecha_span = document.createElement("span");
-          fecha_span.textContent = fecha;
-          fecha_div.appendChild(fecha_span);
-          var excerpt_p = document.createElement("p");
-          excerpt_p.textContent = excerpt;
-          var link_a = document.createElement("a");
-          link_a.href = link;
-          link_a.textContent = "Leer Más";
-          contenido_div.appendChild(titulo_h3);
-          contenido_div.appendChild(fecha_div);
-          contenido_div.appendChild(excerpt_p);
-          contenido_div.appendChild(link_a);
-
-          item.appendChild(imagen_div);
-          item.appendChild(contenido_div);
-
-          return item;
+      $(".prev").click(function () {
+        currentIndex -= 1;
+        if (currentIndex < 0) {
+          currentIndex = itemAmt - 1;
         }
+        rotar_items();
+      });
 
-        /**
-        * Funcion para chequear si la entrada tiene una categoria especifica
-        * @param {object} post
-        * @param {string} categoria_a_chequear
-        * @returns {boolean} true si la entrada tiene la categoria, false si no
-        */
-        function chequear_categoria(post, categoria_a_chequear) {
-          return post.class_list.includes(categoria_a_chequear);
-        }
-
-        /**
-        * Funcion para obtener el link de la entrada
-        * @param {object} post
-        * @returns {string} link de la entrada
-        */
-        function obtener_link(post) {
-          return post.link;
-        }
-        
-        /**
-        * Funcion para obtener el excerpt de la entrada
-        * @param {object} post
-        * @returns {string} excerpt de la entrada
-        */
-        function obtener_excerpt(post) {
-          var excerpt = post.excerpt.rendered;
-          return excerpt.replace(/<\/?p>/g, "").replace("[&hellip;]", "...");
-        }
-
-        /**
-        * Funcion para obtener el titulo de la entrada
-        * @param {object} post
-        * @returns {string} titulo de la entrada
-        */
-        function obtener_titulo(post) {
-          return post.title.rendered;
-        }
-
-        /**
-        * Funcion para obtener la imagen de la entrada
-        * @param {object} post
-        * @returns {string} url de la imagen de la entrada
-        */
-        function obtener_imagen(post) {
-          return (
-            post.yoast_head_json.og_image?.[0]?.url ||
-            "https://via.placeholder.com/400x300"
-          );
-        }
-
-        /**
-        * Funcion para obtener la fecha de la entrada
-        * @param {object} post
-        * @returns {string} fecha de la entrada
-        */
-        function obtener_fecha(post) {
-          return new Date(post.date).toLocaleDateString("es-ES", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          });
-        }
-
-        function rotar_items() {
-          var position = -currentIndex * 100 + "%";
-          container.css("transform", "translateX(" + position + ")");
-        }
-
-        $(".next").click(function () {
+      // Funcionalidad de deslizar con el dedo
+      var hammer;
+      function habilitar_deslizar() {
+        hammer = new Hammer(container[0]);
+        hammer.on("swipeleft", function () {
           currentIndex += 1;
           if (currentIndex > itemAmt - 1) {
             currentIndex = 0;
@@ -320,57 +354,38 @@
           rotar_items();
         });
 
-        $(".prev").click(function () {
+        hammer.on("swiperight", function () {
           currentIndex -= 1;
           if (currentIndex < 0) {
             currentIndex = itemAmt - 1;
           }
           rotar_items();
         });
+      }
 
-        // Funcionalidad de deslizar con el dedo
-        var hammer;
-        function habilitar_deslizar() {
-          hammer = new Hammer(container[0]);
-          hammer.on("swipeleft", function () {
-            currentIndex += 1;
-            if (currentIndex > itemAmt - 1) {
-              currentIndex = 0;
-            }
-            rotar_items();
-          });
-
-          hammer.on("swiperight", function () {
-            currentIndex -= 1;
-            if (currentIndex < 0) {
-              currentIndex = itemAmt - 1;
-            }
-            rotar_items();
-          });
+      function deshabilitar_deslizar() {
+        if (hammer) {
+          hammer.off("swipeleft");
+          hammer.off("swiperight");
         }
+      }
 
-        function deshabilitar_deslizar() {
-          if (hammer) {
-            hammer.off("swipeleft");
-            hammer.off("swiperight");
-          }
+      // Inicializar la funcionalidad de deslizar según el tamaño de la pantalla
+      function verificar_tamano_pantalla() {
+        if (window.innerWidth <= 1024) {
+          habilitar_deslizar();
+        } else {
+          deshabilitar_deslizar();
         }
+      }
 
-        // Inicializar la funcionalidad de deslizar según el tamaño de la pantalla
-        function verificar_tamano_pantalla() {
-          if (window.innerWidth <= 1024) {
-            habilitar_deslizar();
-          } else {
-            deshabilitar_deslizar();
-          }
-        }
+      window.addEventListener("resize", verificar_tamano_pantalla);
+      verificar_tamano_pantalla(); // Verificar al cargar la página
 
-        window.addEventListener("resize", verificar_tamano_pantalla);
-        verificar_tamano_pantalla(); // Verificar al cargar la página
+      obtener_entradas();
+      rotar_items();
+    });
+  </script>
+</body>
 
-        obtener_entradas();
-        rotar_items();
-      });
-    </script>
-  </body>
 </html>
