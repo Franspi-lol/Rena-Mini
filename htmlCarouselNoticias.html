@@ -127,7 +127,7 @@
       }
     }
 
-    @media (max-width: 600px) {
+    @media (min-width: 401px) and (max-width: 600px) {
       .carusel_item {
         flex-direction: column;
       }
@@ -144,6 +144,33 @@
         max-width: 220px;
         max-height: 160px;
       }
+    }
+
+    @media (max-width: 400px) {
+      .carusel_item {
+        flex-direction: column;
+      }
+
+      .carusel_contenido h3 {
+        font-size: 1.2em;
+      }
+
+      .carusel_contenido p {
+        font-size: 1em;
+      }
+
+      .carusel_imagen {
+        max-width: 220px;
+        display: flex;
+        justify-content: center;
+        max-height: 160px;
+      }
+      .carusel_imagen img{
+        max-width: 220px;
+        
+        max-height: 160px;
+      }
+      
     }
   </style>
 </head>
