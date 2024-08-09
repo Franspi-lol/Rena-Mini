@@ -160,21 +160,28 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
     <script>
       jQuery(document).ready(function ($) {
-        var currentIndex = 0;
+        var currentIndex = 1; // Empieza en 1 porque el primer elemento está duplicado
         var items = $(".carusel_item");
         var itemAmt = items.length;
         var container = $(".carusel_container");
 
+        // Función para actualizar la cantidad de ítems
+        function actualizarItemAmt() {
+          items = $(".carusel_item");
+          itemAmt = items.length;
+        }
+
         /**
-       * Funcion para obtener las entradas de la pagina y mostrarlas en el carusel
-       */
+         * Funcion para obtener las entradas de la pagina y mostrarlas en el carusel
+         */
         function obtener_entradas() {
           $.ajax({
             url: "https://renalida.com/wp-json/wp/v2/posts",
             type: "GET",
             success: function (data) {
               data.forEach((post) => {
-                if (chequear_categoria(post, "category-noticias")) { //si la entrada tiene la categoria 'category-noticias'
+                if (chequear_categoria(post, "category-noticias")) {
+                  //si la entrada tiene la categoria 'category-noticias'
                   var imagen = obtener_imagen(post);
                   var fecha = obtener_fecha(post);
                   var titulo = obtener_titulo(post);
@@ -192,6 +199,9 @@
                   itemAmt += 1;
                 }
               });
+              duplicar_items(); // Duplicar los ítems para la transición suave
+              actualizarItemAmt(); // Actualizar la cantidad de ítems después de duplicar
+              container.css("transform", "translateX(-100%)"); // Colocar en la posición inicial correcta
             },
             error: function (error) {
               console.log("Error con la obtención de las entradas", error);
@@ -199,16 +209,15 @@
           });
         }
 
-
         /**
-       * Funcion para crear un elemento html con la informacion de la entrada
-       * @param {string} imagen 
-       * @param {string} titulo 
-       * @param {string} excerpt 
-       * @param {string} fecha 
-       * @param {string} link 
-       * @returns {object} elemento html
-       */
+         * Funcion para crear un elemento html con la informacion de la entrada
+         * @param {string} imagen
+         * @param {string} titulo
+         * @param {string} excerpt
+         * @param {string} fecha
+         * @param {string} link
+         * @returns {object} elemento html
+         */
         function crear_elemnto_html(imagen, titulo, excerpt, fecha, link) {
           var item = document.createElement("div");
           item.classList.add("carusel_item");
@@ -245,48 +254,58 @@
         }
 
         /**
-        * Funcion para chequear si la entrada tiene una categoria especifica
-        * @param {object} post
-        * @param {string} categoria_a_chequear
-        * @returns {boolean} true si la entrada tiene la categoria, false si no
-        */
+         * Funcion para duplicar el primer y último item del carrusel para lograr una transición suave
+         */
+        function duplicar_items() {
+          var firstItem = container.children().first().clone();
+          var lastItem = container.children().last().clone();
+          container.prepend(lastItem);
+          container.append(firstItem);
+        }
+
+        /**
+         * Funcion para chequear si la entrada tiene una categoria especifica
+         * @param {object} post
+         * @param {string} categoria_a_chequear
+         * @returns {boolean} true si la entrada tiene la categoria, false si no
+         */
         function chequear_categoria(post, categoria_a_chequear) {
           return post.class_list.includes(categoria_a_chequear);
         }
 
         /**
-        * Funcion para obtener el link de la entrada
-        * @param {object} post
-        * @returns {string} link de la entrada
-        */
+         * Funcion para obtener el link de la entrada
+         * @param {object} post
+         * @returns {string} link de la entrada
+         */
         function obtener_link(post) {
           return post.link;
         }
-        
+
         /**
-        * Funcion para obtener el excerpt de la entrada
-        * @param {object} post
-        * @returns {string} excerpt de la entrada
-        */
+         * Funcion para obtener el excerpt de la entrada
+         * @param {object} post
+         * @returns {string} excerpt de la entrada
+         */
         function obtener_excerpt(post) {
           var excerpt = post.excerpt.rendered;
           return excerpt.replace(/<\/?p>/g, "").replace("[&hellip;]", "...");
         }
 
         /**
-        * Funcion para obtener el titulo de la entrada
-        * @param {object} post
-        * @returns {string} titulo de la entrada
-        */
+         * Funcion para obtener el titulo de la entrada
+         * @param {object} post
+         * @returns {string} titulo de la entrada
+         */
         function obtener_titulo(post) {
           return post.title.rendered;
         }
 
         /**
-        * Funcion para obtener la imagen de la entrada
-        * @param {object} post
-        * @returns {string} url de la imagen de la entrada
-        */
+         * Funcion para obtener la imagen de la entrada
+         * @param {object} post
+         * @returns {string} url de la imagen de la entrada
+         */
         function obtener_imagen(post) {
           return (
             post.yoast_head_json.og_image?.[0]?.url ||
@@ -295,10 +314,10 @@
         }
 
         /**
-        * Funcion para obtener la fecha de la entrada
-        * @param {object} post
-        * @returns {string} fecha de la entrada
-        */
+         * Funcion para obtener la fecha de la entrada
+         * @param {object} post
+         * @returns {string} fecha de la entrada
+         */
         function obtener_fecha(post) {
           return new Date(post.date).toLocaleDateString("es-ES", {
             year: "numeric",
@@ -307,69 +326,75 @@
           });
         }
 
+        /**
+         * Función para rotar los items del carrusel
+         */
         function rotar_items() {
           var position = -currentIndex * 100 + "%";
           container.css("transform", "translateX(" + position + ")");
         }
 
+        /**
+         * Función para manejar el click en el botón siguiente
+         */
         $(".next").click(function () {
           currentIndex += 1;
-          if (currentIndex > itemAmt - 1) {
-            currentIndex = 0;
-          }
           rotar_items();
+          if (currentIndex >= itemAmt - 1) {
+            setTimeout(function () {
+              container.css("transition", "none");
+              currentIndex = 1; // Volver al primer elemento real
+              rotar_items();
+              setTimeout(function () {
+                container.css("transition", "transform 0.5s ease");
+              }, 50);
+            }, 500); // Duración de la animación antes de saltar al primer ítem
+          }
         });
 
+        /**
+         * Función para manejar el click en el botón anterior
+         */
         $(".prev").click(function () {
           currentIndex -= 1;
-          if (currentIndex < 0) {
-            currentIndex = itemAmt - 1;
-          }
           rotar_items();
+          if (currentIndex <= 0) {
+            setTimeout(function () {
+              container.css("transition", "none");
+              currentIndex = itemAmt - 2; // Volver al último elemento real
+              rotar_items();
+              setTimeout(function () {
+                container.css("transition", "transform 0.5s ease");
+              }, 50);
+            }, 500); // Duración de la animación antes de saltar al último ítem
+          }
         });
 
         // Funcionalidad de deslizar con el dedo
         var hammer;
         function habilitar_deslizar() {
-          hammer = new Hammer(container[0]);
+          hammer = new Hammer(document.querySelector(".noticias_carusel"));
+          hammer.get("swipe").set({ direction: Hammer.DIRECTION_HORIZONTAL });
+
           hammer.on("swipeleft", function () {
-            currentIndex += 1;
-            if (currentIndex > itemAmt - 1) {
-              currentIndex = 0;
-            }
-            rotar_items();
+            $(".next").click();
           });
 
           hammer.on("swiperight", function () {
-            currentIndex -= 1;
-            if (currentIndex < 0) {
-              currentIndex = itemAmt - 1;
-            }
-            rotar_items();
+            $(".prev").click();
           });
         }
 
-        function deshabilitar_deslizar() {
-          if (hammer) {
-            hammer.off("swipeleft");
-            hammer.off("swiperight");
-          }
+        // Habilitar el deslizamiento solo en dispositivos móviles y tabletas
+        if (/Mobi|Tablet|iPad|iPhone/.test(navigator.userAgent)) {
+          habilitar_deslizar();
         }
-
-        // Inicializar la funcionalidad de deslizar según el tamaño de la pantalla
-        function verificar_tamano_pantalla() {
-          if (window.innerWidth <= 1024) {
-            habilitar_deslizar();
-          } else {
-            deshabilitar_deslizar();
-          }
-        }
-
-        window.addEventListener("resize", verificar_tamano_pantalla);
-        verificar_tamano_pantalla(); // Verificar al cargar la página
-
+        // Auto-scroll cada 15 segundos
+        var autoScroll = setInterval(function () {
+          $(".next").click();
+        }, 15000);
+        // Llamar a la función para obtener las entradas cuando la página esté lista
         obtener_entradas();
-        rotar_items();
       });
     </script>
   </body>
