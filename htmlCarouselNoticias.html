@@ -9,8 +9,8 @@
     .noticias_carusel {
       position: relative;
       width: 30rem;
-
-      max-width: 1000px;
+      max-width: 75vw;
+      
       overflow: hidden;
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -126,21 +126,28 @@
     }
 
     @media (max-width: 600px) {
+        .noticias_carusel{
+            max-width: 80vw;
+            max-height: 70vh;
+        }
       .carusel_item {
         flex-direction: column;
+        max-width: 80vw;
+        max-height: 70vh;
       }
 
       .carusel_contenido h3 {
-        font-size: 1.2em;
-      }
-
-      .carusel_contenido p {
         font-size: 1em;
       }
 
+      .carusel_contenido p {
+        font-size: 0.8em;
+      }
+
       .carusel_imagen {
-        max-width: 220px;
-        max-height: 160px;
+         
+        max-width: 250px;
+        max-height: 180px;
       }
     }
   </style>
