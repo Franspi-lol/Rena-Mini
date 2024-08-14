@@ -1,0 +1,229 @@
+<head>
+    <style>
+        .testimonios_carousel_phone {
+            position: relative;
+            width: 90%;
+            max-width: 800px;
+            margin: 0 auto;
+            overflow: hidden;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .carusel_container_phone {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .carusel_item_phone {
+            min-width: 100%;
+            box-sizing: border-box;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .carusel_item_phone img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+
+        .carusel_item_phone p {
+            font-size: 1rem;
+            color: #333;
+        }
+
+        .prev_phone,
+        .next_phone {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            border-radius: 50%;
+            padding: 10px;
+            font-size: 1.5rem;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .prev_phone {
+            left: 10px;
+        }
+
+        .next_phone {
+            right: 10px;
+        }
+
+        .prev_phone:hover,
+        .next_phone:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        @media (max-width: 600px) {
+            .carusel_item_phone img {
+                width: 5rem;
+                height: 5rem;
+            }
+
+            .carusel_item_phone{
+                
+            }
+
+            .carusel_item_phone p {
+                font-size: 0.9rem;
+                
+            }
+            .testimonios_carousel_phone{
+                
+                height: 50vh;
+                width: 1px
+            }
+            .carusel_container_phone{
+                display: flex;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="testimonios_carousel_phone">
+        <div class="prev_phone">←</div>
+        <div class="carusel_container_phone"></div>
+        <div class="next_phone">→</div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        jQuery(document).ready(function ($) {
+
+            var current_index = 1;
+            var items = $(".carusel_item_phone");
+            var items_length = items.length;
+            var container = $(".carusel_container_phone");
+
+            function actualizar_items_length() {
+                items = $(".carusel_item_phone");
+                items_length = items.length;
+            }
+
+            function obtener_entradas() {
+                $.ajax({
+                    url: "https://renalida.com/wp-json/wp/v2/posts",
+                    type: "GET",
+                    success: function (data) {
+                        data.forEach((testimonio) => {
+                            if (chequear_categoria(testimonio, "category-testimonios")) {
+                                var imagen = obtener_imagen(testimonio);
+                                var titulo = obtener_titulo(testimonio);
+                                var excerpt = obtener_excerpt(testimonio);
+                                console.log(imagen, titulo, excerpt);
+                                container.append(crear_elemnto_html(imagen, titulo, excerpt));
+
+
+                            }
+                            duplicar_items();
+                            actualizar_items_length();
+                            container.css("transform", "translateX(-100%)");
+                        })
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    },
+                })
+            }
+
+            function crear_elemnto_html(imagen, titulo, excerpt) {
+                return `
+                    <div class="carusel_item_phone">
+                        <img src="${imagen}" alt="${titulo}">
+                        <h3>${titulo}</h3>
+                        <p>${excerpt}</p>
+                    </div>
+                `;
+
+
+            }
+
+            function duplicar_items() {
+                var firstItem = container.children().first().clone();
+                var lastItem = container.children().last().clone();
+                container.prepend(lastItem);
+                container.append(firstItem);
+            }
+
+            function obtener_imagen(post) {
+                return (
+                    post.yoast_head_json.og_image?.[0]?.url ||
+                    "https://via.placeholder.com/400x300"
+                );
+            }
+            function obtener_titulo(post) {
+                return post.title.rendered;
+            }
+
+            function obtener_excerpt(post) {
+                var excerpt = post.excerpt.rendered;
+                return excerpt.replace(/<\/?p>/g, "").replace("[&hellip;]", "...");
+            }
+
+            function chequear_categoria(testimonio, categoria_a_chequear) {
+                return testimonio.class_list.includes(categoria_a_chequear);
+            }
+
+            function rotar_items() {
+                var position = -current_index * 100 + "%";
+                container.css("transform", "translateX(" + position + ")");
+            }
+            
+          
+
+            $('.prev_phone').click(function () {
+                current_index -= 1;
+                rotar_items();
+                if (current_index <= 0) {
+                    setTimeout(function () {
+                        container.css("transition", "none");
+                        current_index = items_length - 2; // Volver al primer elemento real
+                        rotar_items();
+                        setTimeout(function () {
+                            container.css("transition", "transform 0.5s ease");
+                        }, 50);
+                    }, 500); // Duración de la animación antes de saltar al primer ítem
+                }
+            });
+
+            $('.next_phone').click(function () {
+                current_index += 1;
+                rotar_items();
+                if (current_index >= items_length - 1) {
+                    setTimeout(function () {
+                        container.css("transition", "none");
+                        current_index = 1; // Volver al primer elemento real
+                        rotar_items();
+                        setTimeout(function () {
+                            container.css("transition", "transform 0.5s ease");
+                        }, 50);
+                    }, 500); // Duración de la animación antes de saltar al primer ítem
+                }
+
+            });
+
+            obtener_entradas();
+        });
+
+    </script>
+</body>
