@@ -10,7 +10,7 @@
       position: relative;
       width: 30rem;
       max-width: 75vw;
-      
+
       overflow: hidden;
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -82,22 +82,36 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      font-size: 2rem;
       cursor: pointer;
       z-index: 10;
-      background-color: rgba(0, 0, 0, 0.2);
+      background-color: rgba(0, 0, 0, 0.4);
       color: #fff;
       border-radius: 50%;
-      padding: 10px;
-      transition: background-color 0.3s, transform 0.3s;
+      padding: 0.625rem; /* 10px en rem */
+      transition: opacity 0.3s, transform 0.3s;
+      opacity: 0.8;
+      border: 0.125rem solid #fff; /* 2px en rem */
+      font-size: 1.25rem; /* Tamaño más pequeño para los iconos */
+      width: 2rem; /* 32px en rem */
+      height: 2rem; /* 32px en rem */
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .prev:hover,
     .next:hover {
-      background-color: rgba(0, 0, 0, 0.4);
+      opacity: 1;
       transform: translateY(-50%) scale(1.1);
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+    .prev::before {
+      content: "←";
     }
 
+    .next::before {
+      content: "→";
+    }
     .prev {
       left: 15px;
     }
@@ -126,10 +140,10 @@
     }
 
     @media (max-width: 600px) {
-        .noticias_carusel{
-            max-width: 80vw;
-            max-height: 70vh;
-        }
+      .noticias_carusel {
+        max-width: 80vw;
+        max-height: 70vh;
+      }
       .carusel_item {
         flex-direction: column;
         max-width: 80vw;
@@ -145,7 +159,6 @@
       }
 
       .carusel_imagen {
-         
         max-width: 250px;
         max-height: 180px;
       }
@@ -155,11 +168,11 @@
 
 <body>
   <div class="noticias_carusel">
-    <div class="prev">&lArr;</div>
+    <div class="prev"></div>
     <div class="carusel_container">
       <!-- Los elementos del carrusel se agregarán aquí dinámicamente -->
     </div>
-    <div class="next">&rArr;</div>
+    <div class="next"></div>
   </div>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
