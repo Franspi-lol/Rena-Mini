@@ -1,143 +1,152 @@
 <head>
-    <style>
-      body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background-color: #f5f5f5;
-      }
-  
-      .testimonios_carusel2 {
-        position: relative;
-        width: 30rem;
-        max-width: 1000px;
-        overflow: hidden;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        background: linear-gradient(135deg, #fff, #f0f0f0);
-        margin: auto;
-        margin-top: 20px;
-      }
-  
-      .carusel_container2 {
-        display: flex;
-        transition: transform 0.5s ease;
-      }
-  
-      .carusel_item2 {
-        min-width: 100%;
-        box-sizing: border-box;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        border-radius: 10px;
-        padding: 10px;
-      }
-  
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+    }
+
+    .testimonios_carusel2 {
+      position: relative;
+      width: 30rem;
+      max-width: 1000px;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      background: linear-gradient(135deg, #fff, #f0f0f0);
+      margin: auto;
+      margin-top: 20px;
+    }
+
+    .carusel_container2 {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+
+    .carusel_item2 {
+      min-width: 100%;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      border-radius: 10px;
+      padding: 10px;
+    }
+
+    .video_container2 {
+      width: 100%;
+      max-width: 800px;
+      height: 450px;
+      overflow: hidden;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .video_container2 iframe {
+      width: 100%;
+      height: 100%;
+    }
+
+    .prev2,
+    .next2 {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2rem;
+      cursor: pointer;
+      z-index: 10;
+      background-color: rgba(0, 0, 0, 0.2);
+      color: #fff;
+      border-radius: 50%;
+      padding: 10px;
+      transition: background-color 0.3s, transform 0.3s;
+      opacity: 0.8;
+    }
+
+    .prev2:hover,
+    .next2:hover {
+      background-color: rgba(0, 0, 0, 0.4);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .prev2 {
+      left: 15px;
+    }
+
+    .next2 {
+      right: 15px;
+    }
+
+    @media (max-width: 600px) {
       .video_container2 {
-        width: 100%;
-        max-width: 800px;
-        height: 450px;
-        overflow: hidden;
-        border-radius: 5px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        height: 200px;
       }
-  
-      .video_container2 iframe {
-        width: 100%;
-        height: 100%;
-      }
-  
       .prev2,
       .next2 {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        font-size: 2rem;
-        cursor: pointer;
-        z-index: 10;
-        background-color: rgba(0, 0, 0, 0.2);
-        color: #fff;
-        border-radius: 50%;
-        padding: 10px;
-        transition: background-color 0.3s, transform 0.3s;
-        opacity: 0.8;
+        opacity: 1;
+        transform: translateY(-50%) scale(1.2);
       }
-  
-      .prev2:hover,
-      .next2:hover {
-        background-color: rgba(0, 0, 0, 0.4);
-        transform: translateY(-50%) scale(1.1);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="testimonios_carusel2">
+    <div class="prev2">&lArr;</div>
+    <div class="carusel_container2"></div>
+    <div class="next2">&rArr;</div>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+  <script>
+    jQuery(document).ready(function ($) {
+      var videos = [
+        "https://www.youtube.com/embed/B1HUdaqkYVE",
+        "https://www.youtube.com/embed/6S2j1feUsoo",
+        "https://www.youtube.com/embed/JlP2Uu26vQ8",
+      ];
+
+      var currentIndex = 1;
+      var container = $(".carusel_container2");
+
+      function obtener_testimonios() {
+        videos.forEach(function () {
+          var item = crear_elemnto_html();
+          container.append(item);
+        });
+
+        duplicar_items2();
+        actualizarItemAmt2();
+        container.css("transform", "translateX(-100%)");
+        cargarVideo(currentIndex); // Cargar el primer video
       }
-  
-      .prev2 {
-        left: 15px;
+
+      function crear_elemnto_html() {
+        var item = document.createElement("div");
+        item.classList.add("carusel_item2");
+
+        var video_div = document.createElement("div");
+        video_div.classList.add("video_container2");
+
+        item.appendChild(video_div);
+        return item;
       }
-  
-      .next2 {
-        right: 15px;
-      }
-  
-      @media (max-width: 600px) {
-        .video_container2 {
-          height: 200px;
-        }
-        .prev2,
-        .next2 {
-          opacity: 1;
-          transform: translateY(-50%) scale(1.2);
-        }
-      }
-    </style>
-  </head>
-  
-  <body>
-    <div class="testimonios_carusel2">
-      <div class="prev2">&lArr;</div>
-      <div class="carusel_container2"></div>
-      <div class="next2">&rArr;</div>
-    </div>
-  
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
-    <script>
-      jQuery(document).ready(function ($) {
-        var videos = [
-          "https://www.youtube.com/embed/B1HUdaqkYVE",
-          "https://www.youtube.com/embed/6S2j1feUsoo",
-          "https://www.youtube.com/embed/JlP2Uu26vQ8",
-        ];
-  
-        var currentIndex = 1;
-        var container = $(".carusel_container2");
-  
-        function obtener_testimonios() {
-          videos.forEach(function (videoUrl) {
-            var item = crear_elemnto_html(videoUrl);
-            container.append(item);
-          });
-  
-          duplicar_items2(); // Duplicar los ítems para la transición suave
-          actualizarItemAmt2();
-          container.css("transform", "translateX(-100%)");
-        }
-  
-        function crear_elemnto_html(videoUrl) {
-          var item = document.createElement("div");
-          item.classList.add("carusel_item2");
-  
-          var video_div = document.createElement("div");
-          video_div.classList.add("video_container2");
-  
+
+      function cargarVideo(index) {
+        var videoUrl = videos[index - 1];
+        var videoDiv = $(".carusel_item2").eq(index).find(".video_container2");
+
+        if (videoDiv.children().length === 0) {
           var iframe = document.createElement("iframe");
           iframe.src = videoUrl + "?autoplay=1&mute=1&enablejsapi=1";
           iframe.allow = "autoplay";
           iframe.frameborder = "0";
           iframe.allowFullscreen = true;
-  
-          video_div.appendChild(iframe);
-          item.appendChild(video_div);
-  
+
+          videoDiv.append(iframe);
+
           // Añadir evento para detectar el final del video
           iframe.onload = function () {
             var player = new YT.Player(iframe, {
@@ -150,79 +159,78 @@
               },
             });
           };
-  
-          return item;
         }
-  
-        function duplicar_items2() {
-          var firstItem2 = container.children().first().clone();
-          var lastItem2 = container.children().last().clone();
-          container.prepend(lastItem2);
-          container.append(firstItem2);
-        }
-  
-        function actualizarItemAmt2() {
-          items = $(".carusel_item2");
-          itemAmt = items.length;
-        }
-  
-        function rotar_items2() {
-          var position = -currentIndex * 100 + "%";
-          container.css("transform", "translateX(" + position + ")");
-        }
-  
-        $(".next2").click(function () {
-          currentIndex += 1;
-          rotar_items2();
-          if (currentIndex >= itemAmt - 1) {
+      }
+
+      function duplicar_items2() {
+        var firstItem2 = container.children().first().clone();
+        var lastItem2 = container.children().last().clone();
+        container.prepend(lastItem2);
+        container.append(firstItem2);
+      }
+
+      function actualizarItemAmt2() {
+        items = $(".carusel_item2");
+        itemAmt = items.length;
+      }
+
+      function rotar_items2() {
+        var position = -currentIndex * 100 + "%";
+        container.css("transform", "translateX(" + position + ")");
+        cargarVideo(currentIndex);
+      }
+
+      $(".next2").click(function () {
+        currentIndex += 1;
+        rotar_items2();
+        if (currentIndex >= itemAmt - 1) {
+          setTimeout(function () {
+            container.css("transition", "none");
+            currentIndex = 1; // Volver al primer elemento real
+            rotar_items2();
             setTimeout(function () {
-              container.css("transition", "none");
-              currentIndex = 1; // Volver al primer elemento real
-              rotar_items2();
-              setTimeout(function () {
-                container.css("transition", "transform 0.5s ease");
-              }, 50);
-            }, 500); // Duración de la animación antes de saltar al primer ítem
-          }
-        });
-  
-        $(".prev2").click(function () {
-          currentIndex -= 1;
-          rotar_items2();
-          if (currentIndex <= 0) {
-            setTimeout(function () {
-              container.css("transition", "none");
-              currentIndex = itemAmt - 2; // Volver al último elemento real
-              rotar_items2();
-              setTimeout(function () {
-                container.css("transition", "transform 0.5s ease");
-              }, 50);
-            }, 500); // Duración de la animación antes de saltar al último ítem
-          }
-        });
-  
-        // Funcionalidad de deslizar con el dedo
-        var hammer;
-        function habilitar_deslizar2() {
-          hammer = new Hammer(document.querySelector(".testimonios_carusel2"));
-          hammer.get("swipe").set({ direction: Hammer.DIRECTION_HORIZONTAL });
-  
-          hammer.on("swipeleft", function () {
-            $(".next2").click();
-          });
-  
-          hammer.on("swiperight", function () {
-            $(".prev2").click();
-          });
+              container.css("transition", "transform 0.5s ease");
+            }, 50);
+          }, 500);
         }
-  
-        if (/Mobi|Tablet|iPad|iPhone/.test(navigator.userAgent)) {
-          habilitar_deslizar2(); // Habilita la funcionalidad solo para tablet y celular
-        }
-  
-        obtener_testimonios(); // Llamar a la función para obtener los testimonios cuando la página esté lista
       });
-    </script>
-    <script src="https://www.youtube.com/iframe_api"></script>
-  </body>
-  
+
+      $(".prev2").click(function () {
+        currentIndex -= 1;
+        rotar_items2();
+        if (currentIndex <= 0) {
+          setTimeout(function () {
+            container.css("transition", "none");
+            currentIndex = itemAmt - 2; // Volver al último elemento real
+            rotar_items2();
+            setTimeout(function () {
+              container.css("transition", "transform 0.5s ease");
+            }, 50);
+          }, 500);
+        }
+      });
+
+      // Funcionalidad de deslizar con el dedo
+      var hammer;
+      function habilitar_deslizar2() {
+        hammer = new Hammer(document.querySelector(".testimonios_carusel2"));
+        hammer.get("swipe").set({ direction: Hammer.DIRECTION_HORIZONTAL });
+
+        hammer.on("swipeleft", function () {
+          $(".next2").click();
+        });
+
+        hammer.on("swiperight", function () {
+          $(".prev2").click();
+        });
+      }
+
+      if (/Mobi|Tablet|iPad|iPhone/.test(navigator.userAgent)) {
+        habilitar_deslizar2(); // Habilita la funcionalidad solo para tablet y celular
+      }
+
+      obtener_testimonios(); // Llamar a la función para obtener los testimonios cuando la página esté lista
+    });
+  </script>
+  <script src="https://www.youtube.com/iframe_api"></script>
+</body>
