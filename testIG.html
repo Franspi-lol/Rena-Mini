@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="resultado">
+
+    </div>
+    <script>
+        const access_token = 'IGQWRQTG9LbFBrX1cxbjBibExUNnc0OVdNQ1dHeHVPamZAhbzBMa2JSTnQtdVlpNnZAma3NFRUtKS2JlVkVtbmZAUWDZAUQlNKUmUtOEhDZAnlPb3VmbHVlMWZALRWhZAajdUSnVBTVdoYlR5Q2dYSlkweDYxRDF3UnlWbjQZD';
+        async function obtener_info(access_token) {
+            try {
+                const response = await fetch(`https://graph.instagram.com/me?fields=id,username,media_count&access_token=${access_token}`);
+                const data = await response.json();
+                console.log('Información del usuario:', data);
+                const userID = data.id;
+                console.log('ID:', userID);
+                return userID;
+            } catch (error) {
+                console.error('Error al hacer la solicitud:', error);
+                throw error;
+             
+            }
+                
+        }
+        
+        async function obtener_id_otra_cuenta(access_token, username) {
+             try{
+                const userID = await obtener_info(access_token);
+                console.log('ID Obtener:', userID);
+                const response = await fetch(`https://graph.instagram.com/17841468048546975?fields=business_discovery.username(${username}){followers_count,media_count}`);
+                const data = await response.json();
+                console.log('Información del usuario:', data);
+             }catch(error){
+                 console.error('Error al hacer la solicitud:', error);
+             }
+        }
+
+        function obtner_publicaciones(access_token, user_id) {
+            fetch(`https://graph.instagram.com/${user_id}/media?fields=id,caption,media_type,media_url,thumbnail_url,permalink&access_token=${access_token}`)
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Publicaciones:', data);
+                    data.data.forEach(publicacion => {
+                        console.log('Publicación:', publicacion);
+                        crearImagenHTML(publicacion.media_url);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error al hacer la solicitud:', error);
+                });
+        }
+        function crearImagenHTML(url) {
+            const imagen = document.createElement('img');
+            imagen.src = url;
+            const div = document.querySelector('.resultado');
+            div.appendChild(imagen);
+        }
+        //obtener_info(access_token);
+        //obtner_publicaciones(access_token, obtener_info(access_token));
+        obtener_id_otra_cuenta(access_token, 'patata.ceramica');
+    </script>
+</body>
+
+</html>
