@@ -240,11 +240,16 @@
       }
 
       function cargarVideoT(index) {
+        // chequear si el index es el primero o el último
+        if (index === 0 || index === itemAmtT - 1) {
+          return;
+        }
+      
         var testimonioT = testimoniosT[index - 1];
         var videoDivT = $(".carusel_item2")
           .eq(index)
           .find(".video_container2");
-
+      
         if (videoDivT.children().length === 0) {
           var iframeT = document.createElement("iframe");
           iframeT.src =
@@ -252,9 +257,9 @@
           iframeT.allow = "autoplay";
           iframeT.frameborder = "0";
           iframeT.allowFullscreen = true;
-
+      
           videoDivT.append(iframeT);
-
+      
           // Añadir evento para detectar el final del video
           iframeT.onload = function () {
             var playerT = new YT.Player(iframeT, {
@@ -269,6 +274,7 @@
           };
         }
       }
+      
 
       function duplicar_items2() {
         var firstItem2 = container.children().first().clone();
