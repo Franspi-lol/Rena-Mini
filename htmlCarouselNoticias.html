@@ -120,6 +120,27 @@
       right: 15px;
     }
 
+    .dots {
+      text-align: center;
+      margin-top: 10px;
+    }
+    
+    .dots .dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      margin: 0 5px;
+      background-color: #ccc;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    
+    .dots .dot.active {
+      background-color: #333;
+    }
+    
+
     @media (min-width: 601px) and (max-width: 1024px) {
       .carusel_item {
         flex-direction: column;
@@ -173,6 +194,8 @@
       <!-- Los elementos del carrusel se agregarán aquí dinámicamente -->
     </div>
     <div class="next"></div>
+    <div class="dots"></div> <!-- Dots container -->
+    
   </div>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -221,6 +244,7 @@
             duplicar_items(); // Duplicar los ítems para la transición suave
             actualizarItemAmt(); // Actualizar la cantidad de ítems después de duplicar
             container.css("transform", "translateX(-100%)"); // Colocar en la posición inicial correcta
+            crear_dots();
           },
           error: function (error) {
             console.log("Error con la obtención de las entradas", error);
@@ -348,46 +372,57 @@
       /**
        * Función para rotar los items del carrusel
        */
-      function rotar_items() {
+       function rotar_items() {
         var position = -currentIndex * 100 + "%";
         container.css("transform", "translateX(" + position + ")");
+        $(".dot").removeClass("active");
+        $(".dot").eq(currentIndex - 1).addClass("active");
       }
-
-      /**
-       * Función para manejar el click en el botón siguiente
-       */
       $(".next").click(function () {
         currentIndex += 1;
         rotar_items();
         if (currentIndex >= itemAmt - 1) {
           setTimeout(function () {
             container.css("transition", "none");
-            currentIndex = 1; // Volver al primer elemento real
+            currentIndex = 1;
             rotar_items();
             setTimeout(function () {
               container.css("transition", "transform 0.5s ease");
             }, 50);
-          }, 500); // Duración de la animación antes de saltar al primer ítem
+          }, 500);
         }
       });
-
-      /**
-       * Función para manejar el click en el botón anterior
-       */
+    
       $(".prev").click(function () {
         currentIndex -= 1;
         rotar_items();
         if (currentIndex <= 0) {
           setTimeout(function () {
             container.css("transition", "none");
-            currentIndex = itemAmt - 2; // Volver al último elemento real
+            currentIndex = itemAmt - 2;
             rotar_items();
             setTimeout(function () {
               container.css("transition", "transform 0.5s ease");
             }, 50);
-          }, 500); // Duración de la animación antes de saltar al último ítem
+          }, 500);
         }
       });
+      
+      function crear_dots() {
+        for (var i = 0; i < itemAmt-2; i++) {
+          var dot = $("<span class='dot'></span>");
+          if (i === 0) {
+            dot.addClass("active");
+          }
+          $(".dots").append(dot);
+        }
+    
+        $(".dot").click(function () {
+          var index = $(this).index();
+          currentIndex = index + 1;
+          rotar_items();
+        });
+      }
 
       // Funcionalidad de deslizar con el dedo
       var hammer;
