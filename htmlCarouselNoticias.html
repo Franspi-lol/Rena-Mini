@@ -80,20 +80,20 @@
     .prev,
     .next {
       position: absolute;
-      top: 50%;
+      top: 95%;
       transform: translateY(-50%);
       cursor: pointer;
       z-index: 10;
-      background-color: rgba(0, 0, 0, 0.4);
-      color: #fff;
+      /*background-color: rgba(0, 0, 0, 0.4);*/
+      color: #000000;
       border-radius: 50%;
       padding: 0.625rem; /* 10px en rem */
       transition: opacity 0.3s, transform 0.3s;
-      opacity: 0.8;
-      border: 0.125rem solid #fff; /* 2px en rem */
+      opacity: 0.2;
+     /* border: 0.125rem solid #fff; *//* 2px en rem */
       font-size: 1.25rem; /* Tamaño más pequeño para los iconos */
-      width: 2rem; /* 32px en rem */
-      height: 2rem; /* 32px en rem */
+      width: 1rem; /* 32px en rem */
+      height: 1rem; /* 32px en rem */
       display: flex;
       align-items: center;
       justify-content: center;
@@ -102,8 +102,8 @@
     .prev:hover,
     .next:hover {
       opacity: 1;
-      transform: translateY(-50%) scale(1.1);
-      background-color: rgba(0, 0, 0, 0.6);
+      transform: translateY(-50%) scale(0.9);
+      /*background-color: rgba(0, 0, 0, 0.1);*/
     }
     .prev::before {
       content: "←";
@@ -114,6 +114,7 @@
     }
     .prev {
       left: 15px;
+      
     }
 
     .next {
