@@ -121,62 +121,83 @@
       <div class="next2"></div>
     </div>
 
-    <!-- Código JS permanece igual -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
     <script src="https://www.youtube.com/iframe_api"></script>
     <script>
       jQuery(document).ready(function ($) {
-        var videos = [
-          "https://www.youtube.com/embed/B1HUdaqkYVE",
-          "https://www.youtube.com/embed/6S2j1feUsoo",
-          "https://www.youtube.com/embed/JlP2Uu26vQ8",
+        var testimoniosT = [
+          {
+            videoUrlT: "https://www.youtube.com/embed/B1HUdaqkYVE",
+            tituloT: "Testimonio 1",
+            descripcionT: "Descripcion del testimonio 1",
+          },
+          {
+            videoUrlT: "https://www.youtube.com/embed/6S2j1feUsoo",
+            tituloT: "Testimonio 2",
+            descripcionT: "Descripción del testimonio 2.",
+          },
+          {
+            videoUrlT: "https://www.youtube.com/embed/JlP2Uu26vQ8",
+            tituloT: "Testimonio 3",
+            descripcionT: "Descripción del testimonio 3.",
+          },
         ];
 
         var currentIndex = 1;
         var container = $(".carusel_container2");
 
-        function obtener_testimonios() {
-          videos.forEach(function () {
-            var item = crear_elemnto_html();
-            container.append(item);
+        function obtener_testimoniosT() {
+          testimoniosT.forEach(function (testimonioT) {
+            var itemT = crear_elemnto_htmlT(testimonioT);
+            container.append(itemT);
           });
 
           duplicar_items2();
           actualizarItemAmt2();
           container.css("transform", "translateX(-100%)");
-          cargarVideo(currentIndex); // Cargar el primer video
+          cargarVideoT(currentIndex); // Cargar el primer video
         }
 
-        function crear_elemnto_html() {
-          var item = document.createElement("div");
-          item.classList.add("carusel_item2");
+        function crear_elemnto_htmlT(testimonioT) {
+          var itemT = document.createElement("div");
+          itemT.classList.add("carusel_item2");
 
-          var video_div = document.createElement("div");
-          video_div.classList.add("video_container2");
+          var video_divT = document.createElement("div");
+          video_divT.classList.add("video_container2");
 
-          item.appendChild(video_div);
-          return item;
+          var titulo_divT = document.createElement("h3");
+          titulo_divT.textContent = testimonioT.tituloT;
+
+          var descripcion_divT = document.createElement("p");
+          descripcion_divT.textContent = testimonioT.descripcionT;
+
+          itemT.appendChild(titulo_divT);
+          itemT.appendChild(video_divT);
+          itemT.appendChild(descripcion_divT);
+
+          return itemT;
         }
 
-        function cargarVideo(index) {
-          var videoUrl = videos[index - 1];
-          var videoDiv = $(".carusel_item2")
+        function cargarVideoT(index) {
+          var testimonioT = testimoniosT[index - 1];
+          var videoDivT = $(".carusel_item2")
             .eq(index)
             .find(".video_container2");
 
-          if (videoDiv.children().length === 0) {
-            var iframe = document.createElement("iframe");
-            iframe.src = videoUrl + "?autoplay=1&mute=1&enablejsapi=1";
-            iframe.allow = "autoplay";
-            iframe.frameborder = "0";
-            iframe.allowFullscreen = true;
+          if (videoDivT.children().length === 0) {
+            var iframeT = document.createElement("iframe");
+            iframeT.src =
+              testimonioT.videoUrlT + "?autoplay=1&mute=1&enablejsapi=1";
+            iframeT.allow = "autoplay";
+            iframeT.frameborder = "0";
+            iframeT.allowFullscreen = true;
 
-            videoDiv.append(iframe);
+            videoDivT.append(iframeT);
 
             // Añadir evento para detectar el final del video
-            iframe.onload = function () {
-              var player = new YT.Player(iframe, {
+            iframeT.onload = function () {
+              var playerT = new YT.Player(iframeT, {
                 events: {
                   onStateChange: function (event) {
                     if (event.data == YT.PlayerState.ENDED) {
@@ -197,20 +218,20 @@
         }
 
         function actualizarItemAmt2() {
-          items = $(".carusel_item2");
-          itemAmt = items.length;
+          itemsT = $(".carusel_item2");
+          itemAmtT = itemsT.length;
         }
 
         function rotar_items2() {
-          var position = -currentIndex * 100 + "%";
-          container.css("transform", "translateX(" + position + ")");
-          cargarVideo(currentIndex);
+          var positionT = -currentIndex * 100 + "%";
+          container.css("transform", "translateX(" + positionT + ")");
+          cargarVideoT(currentIndex);
         }
 
         $(".next2").click(function () {
           currentIndex += 1;
           rotar_items2();
-          if (currentIndex >= itemAmt - 1) {
+          if (currentIndex >= itemAmtT - 1) {
             setTimeout(function () {
               container.css("transition", "none");
               currentIndex = 1; // Volver al primer elemento real
@@ -228,7 +249,7 @@
           if (currentIndex <= 0) {
             setTimeout(function () {
               container.css("transition", "none");
-              currentIndex = itemAmt - 2; // Volver al último elemento real
+              currentIndex = itemAmtT - 2; // Volver al último elemento real
               rotar_items2();
               setTimeout(function () {
                 container.css("transition", "transform 0.5s ease");
@@ -238,16 +259,16 @@
         });
 
         // Funcionalidad de deslizar con el dedo
-        var hammer;
+        var hammerT;
         function habilitar_deslizar2() {
-          hammer = new Hammer(document.querySelector(".testimonios_carusel2"));
-          hammer.get("swipe").set({ direction: Hammer.DIRECTION_HORIZONTAL });
+          hammerT = new Hammer(document.querySelector(".testimonios_carusel2"));
+          hammerT.get("swipe").set({ direction: Hammer.DIRECTION_HORIZONTAL });
 
-          hammer.on("swipeleft", function () {
+          hammerT.on("swipeleft", function () {
             $(".next2").click();
           });
 
-          hammer.on("swiperight", function () {
+          hammerT.on("swiperight", function () {
             $(".prev2").click();
           });
         }
@@ -256,7 +277,7 @@
           habilitar_deslizar2(); // Habilita la funcionalidad solo para tablet y celular
         }
 
-        obtener_testimonios(); // Llamar a la función para obtener los testimonios cuando la página esté lista
+        obtener_testimoniosT(); // Llamar a la función para obtener los testimonios cuando la página esté lista
       });
     </script>
   </body>
