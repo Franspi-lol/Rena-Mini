@@ -37,7 +37,7 @@
             color: #333;
         }
 
-        .prev_phone,
+       /* .prev_phone,
         .next_phone {
             position: absolute;
             top: 50%;
@@ -68,7 +68,28 @@
         .next_phone:hover {
             background-color: rgba(0, 0, 0, 0.8);
         }
+*/
 
+        .dots_container_phone {
+            text-align: center;
+            padding-top: 10px;
+        }
+        
+        .dot_phone {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            margin: 0 5px;
+            background-color: #bbb;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .dot_phone.active {
+            background-color: #717171;
+        }
+        
         @media (max-width: 600px) {
             .carusel_item_phone img {
                 width: 5rem;
@@ -95,15 +116,17 @@
                 scroll-snap-type: x mandatory;
                 
             }
+
         }
     </style>
 </head>
 
 <body>
     <div class="testimonios_carousel_phone">
-        <div class="prev_phone">←</div>
+        <div class="prev_phone"></div>
         <div class="carusel_container_phone"></div>
-        <div class="next_phone">→</div>
+        <div class="next_phone"></div>
+        <div class="dots_container_phone"></div>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -114,11 +137,31 @@
             var items = $(".carusel_item_phone");
             var items_length = items.length;
             var container = $(".carusel_container_phone");
+            var dots_container = $(".dots_container_phone");
 
             function actualizar_items_length() {
                 items = $(".carusel_item_phone");
                 items_length = items.length;
+                createDots();
             }
+
+            function createDots() {
+                dots_container.empty();
+                
+                var actual_items_length = items_length - 2; 
+                for (var i = 0; i < actual_items_length; i++) {
+                    dots_container.append('<span class="dot_phone"></span>');
+                }
+                dots_container.children().first().addClass("active");
+            }
+
+            function setActiveDot() {
+                var actual_index = current_index - 1; 
+                if (actual_index >= items_length - 2) actual_index = 0; 
+                $(".dot_phone").removeClass("active");
+                $(".dot_phone").eq(actual_index).addClass("active");
+            }
+            
 
             function obtener_entradas() {
                 $.ajax({
@@ -135,10 +178,11 @@
 
 
                             }
-                            duplicar_items();
-                            actualizar_items_length();
+                            
                             container.css("transform", "translateX(-100%)");
                         })
+                        duplicar_items();
+                        actualizar_items_length();
                     },
                     error: function (error) {
                         console.log(error);
@@ -187,9 +231,13 @@
             function rotar_items() {
                 var position = -current_index * 100 + "%";
                 container.css("transform", "translateX(" + position + ")");
+                setActiveDot();
             }
             
-          
+            $(document).on('click', '.dot_phone', function () {
+                current_index = $(this).index() + 1;
+                rotar_items();
+            });
 
             $('.prev_phone').click(function () {
                 current_index -= 1;
