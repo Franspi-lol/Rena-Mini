@@ -12,13 +12,13 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             background-color: transparent;
         }
-        
+
         .carusel_container_phone {
             display: flex;
             transition: transform 0.5s ease;
             flex-wrap: nowrap;
         }
-        
+
         .carusel_item_phone {
             width: 100%;
             box-sizing: border-box;
@@ -27,7 +27,7 @@
             background-color: rgb(239, 208, 208);
             flex: 0 0 auto;
         }
-        
+
         .carusel_item_phone img {
             width: 150px;
             height: 150px;
@@ -35,17 +35,17 @@
             object-fit: cover;
             margin-bottom: 15px;
         }
-        
+
         .carusel_item_phone p {
             font-size: 1rem;
             color: #333;
         }
-        
+
         .dots_container_phone {
             text-align: center;
             padding-top: 10px;
         }
-        
+
         .dot_phone {
             display: inline-block;
             width: 10px;
@@ -56,49 +56,48 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
-        
+
         .dot_phone.active {
             background-color: #717171;
         }
-        
+
         @media (max-width: 768px) {
             .carusel_item_phone {
                 padding: 15px;
             }
-        
+
             .carusel_item_phone img {
                 width: 100px;
                 height: 100px;
             }
-        
+
             .carusel_item_phone p {
                 font-size: 0.9rem;
             }
-        
+
             .testimonios_carousel_phone {
                 padding: 15px;
             }
         }
-        
+
         @media (max-width: 480px) {
             .carusel_item_phone {
                 padding: 10px;
             }
-        
+
             .carusel_item_phone img {
                 width: 75px;
                 height: 75px;
             }
-        
+
             .carusel_item_phone p {
                 font-size: 0.8rem;
             }
-        
+
             .testimonios_carousel_phone {
                 padding: 10px;
             }
         }
-        
     </style>
 </head>
 
@@ -111,6 +110,7 @@
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
     <script>
         jQuery(document).ready(function ($) {
 
@@ -128,8 +128,8 @@
 
             function createDots() {
                 dots_container.empty();
-                
-                var actual_items_length = items_length - 2; 
+
+                var actual_items_length = items_length - 2;
                 for (var i = 0; i < actual_items_length; i++) {
                     dots_container.append('<span class="dot_phone"></span>');
                 }
@@ -137,12 +137,12 @@
             }
 
             function setActiveDot() {
-                var actual_index = current_index - 1; 
-                if (actual_index >= items_length - 2) actual_index = 0; 
+                var actual_index = current_index - 1;
+                if (actual_index >= items_length - 2) actual_index = 0;
                 $(".dot_phone").removeClass("active");
                 $(".dot_phone").eq(actual_index).addClass("active");
             }
-            
+
 
             function obtener_entradas() {
                 $.ajax({
@@ -159,7 +159,7 @@
 
 
                             }
-                            
+
                             container.css("transform", "translateX(-100%)");
                         })
                         duplicar_items();
@@ -214,7 +214,7 @@
                 container.css("transform", "translateX(" + position + ")");
                 setActiveDot();
             }
-            
+
             $(document).on('click', '.dot_phone', function () {
                 current_index = $(this).index() + 1;
                 rotar_items();
@@ -251,7 +251,24 @@
 
             });
 
+            var hammer;
+            function habilitar_deslizar() {
+                hammer = new Hammer(document.querySelector(".testimonios_carousel_phone"));
+                hammer.get("swipe").set({ direction: Hammer.DIRECTION_HORIZONTAL });
+
+                hammer.on("swipeleft", function () {
+                    $(".next_phone").click();
+                });
+
+                hammer.on("swiperight", function () {
+                    $(".prev_phone").click();
+                });
+            }
+
+            
             obtener_entradas();
+            habilitar_deslizar();
+
         });
 
     </script>
