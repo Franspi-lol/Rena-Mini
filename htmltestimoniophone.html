@@ -10,20 +10,24 @@
             background-color: #fff;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background-color: transparent;
         }
-
+        
         .carusel_container_phone {
             display: flex;
             transition: transform 0.5s ease;
+            flex-wrap: nowrap;
         }
-
+        
         .carusel_item_phone {
-            min-width: 100%;
+            width: 100%;
             box-sizing: border-box;
             padding: 20px;
             text-align: center;
+            background-color: rgb(239, 208, 208);
+            flex: 0 0 auto;
         }
-
+        
         .carusel_item_phone img {
             width: 150px;
             height: 150px;
@@ -31,45 +35,12 @@
             object-fit: cover;
             margin-bottom: 15px;
         }
-
+        
         .carusel_item_phone p {
             font-size: 1rem;
             color: #333;
         }
-
-       /* .prev_phone,
-        .next_phone {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-            background-color: rgba(0, 0, 0, 0.5);
-            color: #fff;
-            border-radius: 50%;
-            padding: 10px;
-            font-size: 1.5rem;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10;
-        }
-
-        .prev_phone {
-            left: 10px;
-        }
-
-        .next_phone {
-            right: 10px;
-        }
-
-        .prev_phone:hover,
-        .next_phone:hover {
-            background-color: rgba(0, 0, 0, 0.8);
-        }
-*/
-
+        
         .dots_container_phone {
             text-align: center;
             padding-top: 10px;
@@ -90,34 +61,44 @@
             background-color: #717171;
         }
         
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
+            .carusel_item_phone {
+                padding: 15px;
+            }
+        
             .carusel_item_phone img {
-                width: 5rem;
-                height: 5rem;
+                width: 100px;
+                height: 100px;
             }
-
-            .carusel_item_phone{
-                
-            }
-
+        
             .carusel_item_phone p {
                 font-size: 0.9rem;
-                
             }
-            .testimonios_carousel_phone{
-                
-                height: 50vh;
-                width: 1px
+        
+            .testimonios_carousel_phone {
+                padding: 15px;
             }
-            .carusel_container_phone{
-                display: flex;
-                flex-wrap: nowrap;
-                overflow-x: auto;
-                scroll-snap-type: x mandatory;
-                
-            }
-
         }
+        
+        @media (max-width: 480px) {
+            .carusel_item_phone {
+                padding: 10px;
+            }
+        
+            .carusel_item_phone img {
+                width: 75px;
+                height: 75px;
+            }
+        
+            .carusel_item_phone p {
+                font-size: 0.8rem;
+            }
+        
+            .testimonios_carousel_phone {
+                padding: 10px;
+            }
+        }
+        
     </style>
 </head>
 
