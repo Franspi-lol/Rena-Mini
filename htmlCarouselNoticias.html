@@ -247,7 +247,7 @@
       var itemAmt = items.length;
       var container = $(".carusel_container");
 
-      function hidePreloader() {
+      function esconder_preloader() {
         $("#preloader").fadeOut("slow");
       }
 
@@ -316,11 +316,11 @@
             actualizarItemAmt(); // Actualizar la cantidad de ítems después de duplicar
             container.css("transform", "translateX(-100%)"); // Colocar en la posición inicial correcta
             crear_dots();
-            hidePreloader()
+            esconder_preloader()
           },
           error: function (error) {
             console.log("Error con la obtención de las entradas", error);
-            hidePreloader();
+            esconder_preloader();
           },
         });
       }
