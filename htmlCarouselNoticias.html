@@ -29,7 +29,7 @@
       box-sizing: border-box;
       display: flex;
       align-items: center;
-      border-bottom: solid 1px #e0e0e0;
+
       padding: 10px;
       flex-direction: row;
       height: 30rem;
@@ -52,7 +52,7 @@
     .carusel_contenido {
       flex: 1;
       padding: 20px;
-      background-color: rgb(242, 181, 181);
+      background-color: rgb(243, 219, 219);
       border-radius: 5px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
@@ -85,13 +85,18 @@
       /*background-color: rgba(0, 0, 0, 0.4);*/
       color: #000000;
       border-radius: 50%;
-      padding: 0.625rem; /* 10px en rem */
+      padding: 0.625rem;
+      /* 10px en rem */
       transition: opacity 0.3s, transform 0.3s;
       opacity: 0.2;
-     /* border: 0.125rem solid #fff; *//* 2px en rem */
-      font-size: 1.25rem; /* Tamaño más pequeño para los iconos */
-      width: 1rem; /* 32px en rem */
-      height: 1rem; /* 32px en rem */
+      /* border: 0.125rem solid #fff; */
+      /* 2px en rem */
+      font-size: 1.25rem;
+      /* Tamaño más pequeño para los iconos */
+      width: 1rem;
+      /* 32px en rem */
+      height: 1rem;
+      /* 32px en rem */
       display: flex;
       align-items: center;
       justify-content: center;
@@ -103,16 +108,18 @@
       transform: translateY(-50%) scale(0.9);
       /*background-color: rgba(0, 0, 0, 0.1);*/
     }
+
     .prev::before {
-      content: "←";
+      content: "";
     }
 
     .next::before {
-      content: "→";
+      content: "";
     }
+
     .prev {
       left: 15px;
-      
+
     }
 
     .next {
@@ -123,7 +130,7 @@
       text-align: center;
       margin-top: 10px;
     }
-    
+
     .dots .dot {
       display: inline-block;
       width: 10px;
@@ -134,11 +141,11 @@
       cursor: pointer;
       transition: background-color 0.3s ease;
     }
-    
+
     .dots .dot.active {
       background-color: #333;
     }
-    
+
 
     @media (min-width: 601px) and (max-width: 1024px) {
       .carusel_item {
@@ -164,6 +171,7 @@
         max-width: 80vw;
         max-height: 70vh;
       }
+
       .carusel_item {
         flex-direction: column;
         max-width: 80vw;
@@ -194,13 +202,16 @@
     </div>
     <div class="next"></div>
     <div class="dots"></div> <!-- Dots container -->
-    
+
   </div>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js" async></script>
+
   <script>
     jQuery(document).ready(function ($) {
+      const CANTIDAD_NOTICIAS = 5;
       var currentIndex = 1; // Empieza en 1 porque el primer elemento está duplicado
       var items = $(".carusel_item");
       var itemAmt = items.length;
@@ -212,32 +223,59 @@
         itemAmt = items.length;
       }
 
+      function obtener_fecha_actual() {
+        let fecha = new Date();
+        return fecha;
+      }
+      /**
+      * Funcion para comparar la fecha de la nota con la fecha actual
+      * @param {object} fecha1
+      * @param {object} fecha2
+      * @returns {boolean} true si los meses son iguales, false si no
+      */
+      function comparar_fecha(fecha1, fecha2) {
+        var mes_nota = new Date(fecha1.date).getMonth();
+        var mes_actual = obtener_fecha_actual().getMonth();
+        return mes_nota === mes_actual;
+      }
+
+      function obtener_datos_append(post) {
+        //si la entrada tiene la categoria 'category-noticias'
+        var imagen = obtener_imagen(post);
+        var fecha = obtener_fecha(post);
+        var titulo = obtener_titulo(post);
+        var excerpt = obtener_excerpt(post);
+        var link = obtener_link(post);
+
+
+
+        var item = crear_elemnto_html(
+          imagen,
+          titulo,
+          excerpt,
+          fecha,
+          link
+        );
+        container.append(item);
+        itemAmt += 1;
+      }
+
       /**
        * Funcion para obtener las entradas de la pagina y mostrarlas en el carusel
        */
       function obtener_entradas() {
+        var contador = 0;
         $.ajax({
-          url: "https://renalida.com/wp-json/wp/v2/posts",
+          url: "https://renalida.com/wp-json/wp/v2/posts?per_page=10",
           type: "GET",
           success: function (data) {
             data.forEach((post) => {
-              if (chequear_categoria(post, "category-noticias")) {
-                //si la entrada tiene la categoria 'category-noticias'
-                var imagen = obtener_imagen(post);
-                var fecha = obtener_fecha(post);
-                var titulo = obtener_titulo(post);
-                var excerpt = obtener_excerpt(post);
-                var link = obtener_link(post);
+              if (chequear_categoria(post, "tag-importante")) {
+                obtener_datos_append(post);
 
-                var item = crear_elemnto_html(
-                  imagen,
-                  titulo,
-                  excerpt,
-                  fecha,
-                  link
-                );
-                container.append(item);
-                itemAmt += 1;
+              } else if (chequear_categoria(post, "category-noticias") && contador < CANTIDAD_NOTICIAS) {
+                contador += 1;
+                obtener_datos_append(post);
               }
             });
             duplicar_items(); // Duplicar los ítems para la transición suave
@@ -267,6 +305,8 @@
         var imagen_div = document.createElement("div");
         imagen_div.classList.add("carusel_imagen");
         var imagen_img = document.createElement("img");
+        imagen_img.setAttribute("data-src", imagen);
+        imagen_img.classList.add("lazyload");
         imagen_img.src = imagen;
         imagen_div.appendChild(imagen_img);
 
@@ -371,12 +411,13 @@
       /**
        * Función para rotar los items del carrusel
        */
-       function rotar_items() {
+      function rotar_items() {
         var position = -currentIndex * 100 + "%";
         container.css("transform", "translateX(" + position + ")");
         $(".dot").removeClass("active");
         $(".dot").eq(currentIndex - 1).addClass("active");
       }
+      
       $(".next").click(function () {
         currentIndex += 1;
         rotar_items();
@@ -391,7 +432,7 @@
           }, 500);
         }
       });
-    
+
       $(".prev").click(function () {
         currentIndex -= 1;
         rotar_items();
@@ -406,16 +447,16 @@
           }, 500);
         }
       });
-      
+
       function crear_dots() {
-        for (var i = 0; i < itemAmt-2; i++) {
+        for (var i = 0; i < itemAmt - 2; i++) {
           var dot = $("<span class='dot'></span>");
           if (i === 0) {
             dot.addClass("active");
           }
           $(".dots").append(dot);
         }
-    
+
         $(".dot").click(function () {
           var index = $(this).index();
           currentIndex = index + 1;
@@ -447,6 +488,7 @@
         $(".next").click();
       }, 5000);*/
       // Llamar a la función para obtener las entradas cuando la página esté lista
+      
       obtener_entradas();
     });
   </script>
