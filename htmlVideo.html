@@ -11,6 +11,7 @@
             max-width: 25vw;
             margin: 0 auto;
             overflow: hidden;
+            background-color: rgb(243, 219, 219);
         }
 
         .video-container video {
@@ -20,29 +21,13 @@
             object-fit: cover;
         }
 
-        .overlay-text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            text-align: center;
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 3rem;
-            border-radius: 5%;
-        }
-
-        .overlay-text h2 {
-            margin: 0;
-            font-size: 1.5em;
-            line-height: 1.2;
-        }
-
-        .overlay-text p {
-            margin: 2rem 0 0;
-            font-size: 1em;
-            line-height: 1.5;
-        }
+        .footer-video {
+            font-size: 0.8em;
+            background-color: rgb(243, 219, 219);
+             color: rgb(0, 0, 0);
+             display: flex;
+             justify-content: space-between;
+    }
     </style>
    
 </head>
@@ -52,14 +37,12 @@
     <div class="video-container">
         <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" rel="noopener">
             <video autoplay muted loop playsinline>
-                <source src="./verti.mp4" type="video/mp4">
+                <source src="https://www.quizzical-mendel.50-62-180-126.plesk.page/wp-content/uploads/2024/08/verti-1.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
-            <div class="overlay-text">
-                <h2>Un Titulo de Renalida</h2>
-                <p>Una gran descripcion de lo que querramos.</p>
-            </div>
+            <p class="footer-video">Mira los testimonios de nuestros pacientes</p>
         </a>
+        <img src="" alt="">
     </div>
 
 
