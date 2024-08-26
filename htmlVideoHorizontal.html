@@ -1,58 +1,61 @@
-
 <head>
-    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+
         .video-container-horizontal {
             position: relative;
             width: 100%;
-            max-width: 50vw; 
+            max-width: 90vw;
             margin: 0 auto;
             overflow: hidden;
         }
-        
+
         .video-container-horizontal video {
             width: 100%;
             height: auto;
             display: block;
             object-fit: cover;
         }
-        
+
         .overlay-text-horizontal {
             position: absolute;
             bottom: 2rem;
             left: 2rem;
             color: white;
             text-align: left;
-            background-color: rgba(0, 0, 0, 0.5); 
+            background-color: rgba(0, 0, 0, 0.5);
             padding: 1rem;
             border-radius: 2rem;
-            max-width: 90%; 
+            max-width: 90%;
         }
-        
+
         .overlay-text-horizontal h2 {
             margin: 0;
             font-size: 1.5em;
             line-height: 1.2;
         }
-        
+
         .overlay-text-horizontal p {
             margin: 10px 0 0;
             font-size: 1.2em;
             line-height: 1.5;
         }
-        
     </style>
 </head>
 <body>
     <div class="video-container-horizontal">
-        <video autoplay muted loop playsinline>
-            <source src="./hori.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-        <div class="overlay-text-horizontal">
-            <h2>Gran titulo</h2>
-            <p>Una descripcion aun mejor.</p>
-        </div>
+        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
+            <video autoplay muted loop playsinline>
+                <source src="./hori.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="overlay-text-horizontal">
+                <h2>Titulo</h2>
+                <p>Descripcion del video va aqui.</p>
+            </div>
+        </a>
     </div>
-    
 </body>
