@@ -18,7 +18,7 @@
       justify-content: center;
       align-items: center;
     }
-  
+
     #preloader .spinner {
       border: 12px solid #f3f3f3;
       border-top: 12px solid #3498db;
@@ -27,23 +27,20 @@
       height: 60px;
       animation: spin 1s linear infinite;
     }
-  
+
     @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
     }
 
     .noticias_carusel {
-      position: relative;
-      width: 50rem;
-      max-width: 75vw;
-
       overflow: hidden;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      background-color: transparent;
-      margin: auto;
-      margin-top: 20px;
+
     }
 
     .carusel_container {
@@ -55,113 +52,96 @@
       min-width: 100%;
       box-sizing: border-box;
       display: flex;
-      align-items: center;
-
-      padding: 10px;
+      align-items: stretch;
       flex-direction: row;
-      height: 30rem;
+      max-height: 35vh;
+
     }
 
     .carusel_imagen {
-      width: 50%;
+      width: 35%;
       overflow: hidden;
       border-radius: 5px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: stretch;
+      max-height: 35vh;
     }
 
     .carusel_imagen img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border: 1px solid rgba(0, 0, 0, 0.5);
+      max-height: 35vh;
+
     }
 
     .carusel_contenido {
       flex: 1;
-      padding: 20px;
+      padding-left: 0.5rem;
       background-color: rgb(243, 219, 219);
       border-radius: 5px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      max-height: 35vh;
+      overflow: hidden;
+    }
+
+    .carusel_contenido a {
+      font-size: 0.8em;
+      white-space: nowrap;
     }
 
     .carusel_contenido h3 {
-      font-size: 1.5em;
-      margin: 0;
+      font-size: 1.2em;
+
       color: #333;
     }
 
     .carusel_contenido p {
-      margin: 10px 0;
       color: #666;
+      font-size: 0.8em;
     }
 
     .carusel_contenido .date-views {
-      font-size: 0.8em;
+      font-size: 0.7em;
       color: #999;
+
+
+    }
+
+    .carusel_contenido .link-container {
       display: flex;
-      justify-content: space-between;
+      flex-wrap: wrap;
+      /* Allow the links to wrap */
+      gap: 10px;
+      /* Add spacing between links */
+      margin-top: 10px;
     }
 
-    .prev,
-    .next {
-      position: absolute;
-      top: 95%;
-      transform: translateY(-50%);
-      cursor: pointer;
-      z-index: 10;
-      /*background-color: rgba(0, 0, 0, 0.4);*/
-      color: #000000;
-      border-radius: 50%;
-      padding: 0.625rem;
-      /* 10px en rem */
-      transition: opacity 0.3s, transform 0.3s;
-      opacity: 0.2;
-      /* border: 0.125rem solid #fff; */
-      /* 2px en rem */
-      font-size: 1.25rem;
-      /* Tamaño más pequeño para los iconos */
-      width: 1rem;
-      /* 32px en rem */
-      height: 1rem;
-      /* 32px en rem */
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .link-container a {
+      flex: 1 1 auto;
+      /* Allow links to shrink/grow inside the container */
+      text-align: center;
+      /* Center align the text */
+      padding: 5px;
+      background-color: #f3f3f3;
+      border-radius: 5px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     }
 
-    .prev:hover,
-    .next:hover {
-      opacity: 1;
-      transform: translateY(-50%) scale(0.9);
-      /*background-color: rgba(0, 0, 0, 0.1);*/
-    }
-
-    .prev::before {
-      content: "";
-    }
-
-    .next::before {
-      content: "";
-    }
-
-    .prev {
-      left: 15px;
-
-    }
-
-    .next {
-      right: 15px;
-    }
 
     .dots {
       text-align: center;
-      margin-top: 10px;
+      margin-top: 0.1rem;
     }
 
     .dots .dot {
       display: inline-block;
-      width: 10px;
-      height: 10px;
+      width: 7px;
+      height: 7px;
       margin: 0 5px;
       background-color: #ccc;
       border-radius: 50%;
@@ -172,50 +152,35 @@
     .dots .dot.active {
       background-color: #333;
     }
-
-
-    @media (min-width: 601px) and (max-width: 1024px) {
-      .carusel_item {
-        flex-direction: column;
+    @media (min-width: 1500px) {
+      .carusel_contenido {
+        padding-left: 1rem;
+        max-height: 45vh; /* Increase height for larger screens */
       }
-
+    
       .carusel_contenido h3 {
-        font-size: 1.3em;
+        font-size: 1.8em; /* Increase font size for headings */
       }
-
+    
       .carusel_contenido p {
-        font-size: 1.1em;
+        font-size: 1em; /* Slightly increase paragraph text size */
       }
-
+    
+      .carusel_contenido .date-views {
+        font-size: 0.9em; /* Increase the size of the date text */
+      }
+    
+      .link-container {
+        gap: 15px; /* Increase the space between links */
+      }
+    
+      .link-container a {
+        font-size: 1em; /* Make the links a bit larger */
+        padding: 8px 12px; /* Add more padding for better readability */
+      }
+    
       .carusel_imagen {
-        max-width: 250px;
-        max-height: 180px;
-      }
-    }
-
-    @media (max-width: 600px) {
-      .noticias_carusel {
-        max-width: 80vw;
-        max-height: 70vh;
-      }
-
-      .carusel_item {
-        flex-direction: column;
-        max-width: 80vw;
-        max-height: 70vh;
-      }
-
-      .carusel_contenido h3 {
-        font-size: 1em;
-      }
-
-      .carusel_contenido p {
-        font-size: 0.8em;
-      }
-
-      .carusel_imagen {
-        max-width: 250px;
-        max-height: 180px;
+        width: 40%; /* Increase image size */
       }
     }
   </style>
@@ -348,28 +313,46 @@
 
         var contenido_div = document.createElement("div");
         contenido_div.classList.add("carusel_contenido");
+
         var titulo_h3 = document.createElement("h3");
         titulo_h3.textContent = titulo;
+
         var fecha_div = document.createElement("div");
         fecha_div.classList.add("date-views");
         var fecha_span = document.createElement("span");
         fecha_span.textContent = fecha;
         fecha_div.appendChild(fecha_span);
+
         var excerpt_p = document.createElement("p");
         excerpt_p.textContent = excerpt;
+
+        var link_container = document.createElement("div");
+        link_container.style.display = "flex"; // Flex container to align the links
+
         var link_a = document.createElement("a");
         link_a.href = link;
         link_a.textContent = "Leer Más";
+        link_a.style.marginRight = "10px"; // Add spacing between the two links
+
+        var link_leer_todo = document.createElement("a");
+        link_leer_todo.href = 'https://renalida.com/category/noticias/';
+        link_leer_todo.textContent = "Todas las Noticias";
+
+        // Append the links to the link container
+        link_container.appendChild(link_a);
+        link_container.appendChild(link_leer_todo);
+
         contenido_div.appendChild(titulo_h3);
         contenido_div.appendChild(fecha_div);
         contenido_div.appendChild(excerpt_p);
-        contenido_div.appendChild(link_a);
+        contenido_div.appendChild(link_container); // Add the link container to the content
 
         item.appendChild(imagen_div);
         item.appendChild(contenido_div);
 
         return item;
       }
+
 
       /**
        * Funcion para duplicar el primer y último item del carrusel para lograr una transición suave
@@ -453,7 +436,7 @@
         $(".dot").removeClass("active");
         $(".dot").eq(currentIndex - 1).addClass("active");
       }
-      
+
       $(".next").click(function () {
         currentIndex += 1;
         rotar_items();
@@ -524,7 +507,7 @@
         $(".next").click();
       }, 5000);*/
       // Llamar a la función para obtener las entradas cuando la página esté lista
-      
+
       obtener_entradas();
     });
   </script>

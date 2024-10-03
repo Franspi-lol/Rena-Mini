@@ -6,12 +6,12 @@
         }
 
         .video-container {
-            position: relative;
+            
             width: 100%;
-            max-width: 25vw;
+            max-height: 35vh;
             margin: 0 auto;
             overflow: hidden;
-            background-color: rgb(243, 219, 219);
+             background-color: transparent;;
         }
 
         .video-container video {
@@ -19,14 +19,16 @@
             height: auto;
             display: block;
             object-fit: cover;
+            
         }
 
         .footer-video {
-            font-size: 0.8em;
-            background-color: rgb(243, 219, 219);
-             color: rgb(0, 0, 0);
-             display: flex;
-             justify-content: space-between;
+             position: absolute;
+            bottom: 1%; 
+            left: 5%; 
+            width: 25%;
+            height: auto;
+            
     }
     </style>
    
@@ -35,14 +37,14 @@
 <body>
 
     <div class="video-container">
-        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" rel="noopener">
+        <a href="https://www.youtube.com/watch?v=ZaLMxT0oo7Y&list=PLdSQJO-LvSE_g_7ApiKS_Ba4aL4qKW3RZ" target="_blank" rel="noopener">
             <video autoplay muted loop playsinline>
                 <source src="https://www.quizzical-mendel.50-62-180-126.plesk.page/wp-content/uploads/2024/08/verti-1.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
-            <p class="footer-video">Mira los testimonios de nuestros pacientes</p>
+            <img src="https://www.quizzical-mendel.50-62-180-126.plesk.page/wp-content/uploads/2024/08/youtube-logo-png-46031.png" class="footer-video"></img>
+            
         </a>
-        <img src="" alt="">
     </div>
 
 
