@@ -1,0 +1,38 @@
+<head>
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+
+</head>
+
+<body>
+    <video id="myVideo" autoplay muted>
+        <source
+            src="https://www.quizzical-mendel.50-62-180-126.plesk.page/wp-content/uploads/2024/08/Video-sin-titulo-‐-Hecho-con-Clipchamp-3.mp4"
+            type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const video = document.getElementById('myVideo');
+            const logo = document.getElementsByClassName('hfe-site-logo');
+            logo[0].classList.add('hidden');
+
+            if (video) {
+                console.log('Video element found');
+                video.addEventListener('ended', () => {
+                    console.log('Video ended');
+                    video.classList.add('hidden');
+                    logo[0].classList.remove('hidden');
+                });
+            } else {
+                console.log('Video element not found');
+            }
+        });
+    </script>
+
+</body>
+
+</html>
