@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake Pulsating Cursor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f9;
+            overflow: hidden; /* Prevent the fake cursor from causing scrollbars */
+        }
+        
+        .link-container {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .pulsating-link {
+            text-decoration: none;
+            color: #007bff;
+            font-size: 20px;
+            font-weight: bold;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Fake Cursor */
+        .fake-cursor {
+            position: absolute;
+            top: 50%;
+            left: -40px; /* Position it slightly to the left of the link */
+            width: 32px;
+            height: 32px;
+            background-image: url('https://banner2.cleanpng.com/20180622/skr/aazdzi84h.webp'); /* Replace with your hand image */
+            background-size: contain;
+            background-repeat: no-repeat;
+            animation: pulse 1.5s infinite ease-in-out;
+            pointer-events: none; /* Prevent interaction with the fake cursor */
+            z-index: 0;
+        }
+        
+        /* Pulsating Animation */
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 0.7;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="link-container">
+        <a href="#" class="pulsating-link">Hover over me</a>
+        <div class="fake-cursor"></div>
+    </div>
+</body>
+</html>
