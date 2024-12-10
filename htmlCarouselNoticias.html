@@ -466,22 +466,44 @@
           }, 500);
         }
       });
+      
+      
 
       function crear_dots() {
-        for (var i = 0; i < itemAmt - 2; i++) {
-          var dot = $("<span class='dot'></span>");
-          if (i === 0) {
-            dot.addClass("active");
-          }
-          $(".dots").append(dot);
+        const dotsContainer = $(".dots");
+        dotsContainer.empty(); // Clear existing dots
+        for (let i = 0; i < itemAmt - 2; i++) {
+          const dot = $("<div>").addClass("dot");
+          if (i === 0) dot.addClass("active"); // Set the first dot as active
+          dotsContainer.append(dot);
         }
-
+      
         $(".dot").click(function () {
-          var index = $(this).index();
+          const index = $(this).index();
           currentIndex = index + 1;
           rotar_items();
         });
       }
+
+      let autoplay = setInterval(function () {
+        $(".next").click();
+      }, 5000);
+      
+      $(".carusel_container").hover(
+        function () {
+          clearInterval(autoplay); // Pause on hover
+        },
+        function () {
+          autoplay = setInterval(function () {
+            $(".next").click();
+          }, 5000);
+        }
+      );
+
+      $(window).on("load", function () {
+        esconder_preloader();
+      });
+      
 
       // Funcionalidad de deslizar con el dedo
       var hammer;
