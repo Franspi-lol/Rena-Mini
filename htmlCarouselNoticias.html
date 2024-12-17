@@ -66,13 +66,14 @@
       display: flex;
       align-items: stretch;
       max-height: 35vh;
+      background-color: rgb(243, 219, 219);
     }
 
     .carusel_imagen img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      max-height: 35vh;
+      max-height: 100%;
 
     }
 
@@ -85,7 +86,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      max-height: 35vh;
+      max-height: 100%;
       overflow: hidden;
     }
 
@@ -152,37 +153,7 @@
     .dots .dot.active {
       background-color: #333;
     }
-    @media (min-width: 1500px) {
-      .carusel_contenido {
-        padding-left: 1rem;
-        max-height: 45vh; /* Increase height for larger screens */
-      }
     
-      .carusel_contenido h3 {
-        font-size: 1.8em; /* Increase font size for headings */
-      }
-    
-      .carusel_contenido p {
-        font-size: 1em; /* Slightly increase paragraph text size */
-      }
-    
-      .carusel_contenido .date-views {
-        font-size: 0.9em; /* Increase the size of the date text */
-      }
-    
-      .link-container {
-        gap: 15px; /* Increase the space between links */
-      }
-    
-      .link-container a {
-        font-size: 1em; /* Make the links a bit larger */
-        padding: 8px 12px; /* Add more padding for better readability */
-      }
-    
-      .carusel_imagen {
-        width: 40%; /* Increase image size */
-      }
-    }
   </style>
 </head>
 
